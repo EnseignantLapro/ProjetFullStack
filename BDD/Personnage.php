@@ -9,7 +9,7 @@ class Personnage{
     public function __construct($id){
         //récupérer le bon personnage avec son id
         //simule un user
-        $this->_nom = "julien";
+        $this->_nom = "test";
 
     }
 
