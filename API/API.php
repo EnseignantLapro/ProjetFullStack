@@ -8,10 +8,11 @@
 
     if(isset($_POST['truc'])&&isset($_POST['machin']))
     {
-        $persotemp1= new Personnage($_POST['truc'],..);
-        $persotemp2= new Personnage($_POST['machin'],..);
+        $persotemp1= new Personnage($_POST['truc']);
+        $persotemp2= new Personnage($_POST['machin']);
 
-        combat($persotemp1,$persotemp2);
+        $persotemp1->afficherInfo();
+        $persotemp2->afficherInfo();
     }
 
 ?>
