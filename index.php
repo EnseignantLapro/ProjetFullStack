@@ -17,7 +17,7 @@
         echo "je suis connect" ;
     }
 
-    $Perso1 = new Personnage();
+    $Perso1 = new Personnage(0);
 
     echo $Base;
 
