@@ -1,18 +1,24 @@
 <?php include "../BDD/API.php";
 
     $truc =1;
-    $bidule =2;
+    
 
     $_POST['truc'] = $truc;
-    $_POST['machin'] = $bidule;
+   
 
-    if(isset($_POST['truc'])&&isset($_POST['machin']))
+    if(isset($_POST['truc']))
     {
-        $persotemp1= new Personnage($_POST['truc']);
-        $persotemp2= new Personnage($_POST['machin']);
+        $persotemp1= new Personnage("blabla");
+        $persotemp2= new Personnage("lalaa");
 
-        $persotemp1->afficherInfo();
-        $persotemp2->afficherInfo();
+        $persotemp1->attaque($persotemp2);
+       
+        $vieperso1 =  $persotemp1->getvie();
+        $vieperso2 =  $persotemp2->getvie();
+        
+
+        $jsonretour = "{_Vie:vieperso1,_Vie:vieperso2}";
+        
     }
 
 ?>
