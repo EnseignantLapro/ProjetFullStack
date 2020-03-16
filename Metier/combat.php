@@ -4,6 +4,8 @@ include "../BDD/Personnage.php";
 
 class attaque {
 
+private    
+
 function attaque() {
 
     
