@@ -30,7 +30,7 @@ class Hero
         $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
 
-    // Dev by Wantelez Florian 
+    // Dev by Wantelez Florian //
     // Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
     public function AttaqueMob($IdMob)
     {
