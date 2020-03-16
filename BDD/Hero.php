@@ -34,10 +34,14 @@ class Hero
     // Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
     public function AttaqueMob($IdMob)
     {
+        // on selectionne la vie du monstre
         $DataMonstre = $this->_Bdd->query("SELECT * from /*monstre*/ where id =" . $IdMob . "");
         $TabdDataMonstre = $DataMonstre->fetch();
+
+        // on lui soustrais l'attaque du héro
         $NewVieMonstre = $TabdDataMonstre[/*vie*/] - $this->_Attaque;
 
+            // Si ça est inférieure à 0 ou null alors il est mort
         if ($NewVieMonstre <= 0) {
 
             $this->_Bdd->query("UPDATE /*TableMob*/ set etat = 'mort' WHERE idmob =" . $IdMob . "");
