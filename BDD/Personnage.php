@@ -1,6 +1,9 @@
 <?php
 
-class Personnage{
+
+// Dev By Fresi et Wantelez
+class Personnage
+{
 
     private $_Id;
     private $_Pseudo;
@@ -25,26 +28,39 @@ class Personnage{
         $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
         $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
-        // Dev By Wantelez (pas encore fini)
-     public function Attaque($IdAgresseur, $IdVictime) {
+    // Dev By Wantelez
+    public function Attaque()
+    {
 
-        $bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
-  
-     }
+    }
+
+
+    // Dev By Fresi
     //Accesseur
     function GetID()
     {
         return $this->_Id;
     }
+
+    // Dev By Fresi
+    // Fonction qui renvoie la valeur de la vie
+    function GetVie()
+    {
+        return $this->_Vie;
+    }
+
+    // Dev By Fresi
+    // Fonction pour changer de Pseudo
     function SetPseudo($NouveauSpoeudo)
     {
         return $this->_Pseudo = $NouveauSpoeudo;
     }
 
-
+    // Dev By Fresi
+    // Fonction qui affiche les statistiques d'un personnage
     public function AfficherStats()
     {
 
-        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " PV et " . $this->_attaque . " d'attaque";
+        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_attaque . " d'attaque";
     }
 }
