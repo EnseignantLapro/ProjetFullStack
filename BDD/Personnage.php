@@ -11,9 +11,10 @@ class Personnage
     private $_Attaque;
     private $_Bdd;
 
-    public function __construct($IdDuPseudo)
+
+    public function __construct($IdDuPseudo,$Bdd)
     {
-        $this->_Bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
+        $this->_Bdd = $Bdd;
         $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =".$IdDuPseudo."");
         $TabDataPersonnage = $DataPersonnage->fetch();
         $this->_Id = $IdDuPseudo;
