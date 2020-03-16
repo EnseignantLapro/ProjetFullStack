@@ -25,7 +25,4 @@
 
     include "./IHM/footer.php";
 
-
-
-
 ?>

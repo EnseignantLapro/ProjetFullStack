@@ -2,33 +2,41 @@
 
 class Personnage{
 
-    private $_id;
-    private $_pseudo;
-    private $_vie;
-    private $_attaque;
+    private $_Id;
+    private $_Pseudo;
+    private $_Vie;
+    private $_Attaque;
 
-    public function __construct($idDuPseudo)
+    public function __construct($IdDuPseudo)
     {
-        $this->_id = $idDuPseudo;
+        $this->_Id = $IdDuPseudo;
 
         //go to base chercher les info du personnages par id
 
 
         //verifier que id est coorrect sinon simulé un perso
 
-        $this->_pseudo = "Perso Simulé N°" . $idDuPseudo;
-        $this->_vie = 50;  // La vie sera prédéfini à celle du niveau 1.
-        $this->_attaque = 5;  // L'attaque sera défini à celle du niveau 1.
+        $this->_Pseudo = "Perso Simulé N°" . $IdDuPseudo;
+        $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
+        $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
+    }
+        // Dev By Wantelez
+     public function Attaque() {
+
+
     }
 
+
+
+
     //Accesseur
-    function getID()
+    function GetID()
     {
-        return $this->_id;
+        return $this->_Id;
     }
-    function setPseudo($nouveauSpoeudo)
+    function SetPseudo($NouveauSpoeudo)
     {
-        return $this->_pseudo = $nouveauSpoeudo;
+        return $this->_Pseudo = $NouveauSpoeudo;
     }
 
 
@@ -38,5 +46,3 @@ class Personnage{
         echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " PV et " . $this->_attaque . " d'attaque";
     }
 }
-
-?>
