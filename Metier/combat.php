@@ -4,14 +4,21 @@
 include "../BDD/Personnage.php";
 
 
+function attaque() {
+
+    
+}
+
 function combat($Perso1,$Perso2){
-    echo "je suis wantelez";
+    
+    echo "je suis ".$Perso1;
     echo "combat de ".$Perso1->afficherInfo()." et de ".$Perso2->afficherInfo();
-
-
 }
 
 
-
 ?>
+
+
+
+
 
