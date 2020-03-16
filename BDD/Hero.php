@@ -35,7 +35,7 @@ class Hero
     public function AttaqueMob($IdMob)
     {
         // on selectionne la vie du monstre
-        $DataMonstre = $this->_Bdd->query("SELECT * from /*monstre*/ where id =" . $IdMob . "");
+        $DataMonstre = $this->_Bdd->query("SELECT * from /*TableMob*/ where id =" . $IdMob . "");
         $TabdDataMonstre = $DataMonstre->fetch();
 
         // on lui soustrais l'attaque du héro
