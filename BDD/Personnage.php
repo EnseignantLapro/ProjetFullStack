@@ -1,42 +1,66 @@
 <?php
 
-class Personnage{
 
-    private $_id;
-    private $_pseudo;
-    private $_vie;
-    private $_attaque;
+// Dev By Fresi et Wantelez
+class Personnage
+{
 
-    public function __construct($idDuPseudo)
+    private $_Id;
+    private $_Pseudo;
+    private $_Vie;
+    private $_Attaque;
+
+    public function __construct($IdDuPseudo)
     {
-        $this->_id = $idDuPseudo;
+        $bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
+        $DataPersonnage = $bdd->query("SELECT * from personnage where id =".$IdDuPseudo."");
+        $TabDataPersonnage = $DataPersonnage->fetch();
+        $this->_Id = $IdDuPseudo;
+        $this->_Vie = $TabDataPersonnage['vie'];
+        $this->_Attaque = $TabDataPersonnage['attaque']; 
 
         //go to base chercher les info du personnages par id
 
 
         //verifier que id est coorrect sinon simulé un perso
 
-        $this->_pseudo = "Perso Simulé N°" . $idDuPseudo;
-        $this->_vie = 50;  // La vie sera prédéfini à celle du niveau 1.
-        $this->_attaque = 5;  // L'attaque sera défini à celle du niveau 1.
+        $this->_Pseudo = "Perso Simulé N°" . $IdDuPseudo;
+        $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
+        $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
+    }
+    // Dev By Wantelez
+    public function Attaque()
+    {
+
     }
 
+
+    // Dev By Fresi
     //Accesseur
-    function getID()
+    function GetID()
     {
-        return $this->_id;
-    }
-    function setPseudo($nouveauSpoeudo)
-    {
-        return $this->_pseudo = $nouveauSpoeudo;
+        return $this->_Id;
     }
 
+    // Dev By Fresi
+    // Fonction qui renvoie la valeur de la vie
+    function GetVie()
+    {
+        return $this->_Vie;
+    }
 
+    // Dev By Fresi
+    // Fonction pour changer de Pseudo
+    function SetPseudo($NouveauSpoeudo)
+    {
+        return $this->_Pseudo = $NouveauSpoeudo;
+    }
+
+    // Dev By Fresi
+    // Fonction qui affiche les statistiques d'un personnage
     public function AfficherStats()
     {
 
-        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " PV et " . $this->_attaque . " d'attaque";
+        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_attaque . " d'attaque";
     }
 }
-
-?>
