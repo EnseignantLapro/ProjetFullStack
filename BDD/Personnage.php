@@ -25,7 +25,7 @@ class Personnage{
         $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
         $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
-        // Dev By Wantelez
+        // Dev By Wantelez (pas encore fini)
      public function Attaque($IdAgresseur, $IdVictime) {
 
         $bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
