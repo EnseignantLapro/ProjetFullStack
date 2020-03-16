@@ -1,6 +1,7 @@
 <?php
 
-class Personnage{
+class Personnage
+{
 
     private $_Id;
     private $_Pseudo;
@@ -20,13 +21,11 @@ class Personnage{
         $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
         $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
-        // Dev By Wantelez
-     public function Attaque() {
-
+    // Dev By Wantelez
+    public function Attaque()
+    {
 
     }
-
-
 
 
     //Accesseur
@@ -34,11 +33,16 @@ class Personnage{
     {
         return $this->_Id;
     }
+
+    function GetVie()
+    {
+        return $this->_Vie;
+    }
+
     function SetPseudo($NouveauSpoeudo)
     {
         return $this->_Pseudo = $NouveauSpoeudo;
     }
-
 
     public function AfficherStats()
     {
