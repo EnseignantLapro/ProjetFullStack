@@ -8,7 +8,7 @@
         echo 'go plus loin <a href="?map=768676">768676</a>';
 
     }else{
-        echo "vous etes perdu";
+        echo "vous etes perdu non";
     }
     
     if ($connect == true){
