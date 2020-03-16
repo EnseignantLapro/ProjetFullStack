@@ -4,7 +4,7 @@ include "./BDD/Personnage.php";
 echo "header";
 
 
-$Base = "matt";
+$Base = "matt2.0";
 
 
 $connect = true;
