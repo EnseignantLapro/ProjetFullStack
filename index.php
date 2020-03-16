@@ -19,6 +19,6 @@ if ($connect == true) {
 
 }
 
-$Perso1 = new Personnage(0, $Bdd);
+$Perso1 = new Hero(0, $Bdd);
 
 include "./IHM/footer.php";
