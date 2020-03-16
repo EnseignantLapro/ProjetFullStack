@@ -12,13 +12,27 @@ include "config.php";
         echo "vous etes perdu ";
     }
 */
-if ($connect == true) {
-    echo "je suis connect";
-} else if ($connect == false) {
+?>
+<form method="post" action="">
+    <h3>Log In</h3>
+    <fieldset>
+        <input type="text" name="email" placeholder="Adresse Mail" autofocus required>
+        <input type="text" name="password" placeholder="Mot de passe" required>
+    </fieldset>
+    <fieldset>
+        <form method="post" action="">
+            <input class="button" type="submit" value="Se connecter">
+        </form>
+        <form method="post" action="">
+            <input class="button" type="submit" value="S'inscrire">
+        </form>
+    </fieldset>
+    <?php
+    if ($connect == true) {
+        echo "je suis connect";
+    } else if ($connect == false) {
+    }
 
+    $Perso1 = new Personnage(0, $Bdd);
 
-}
-
-$Perso1 = new Personnage(0, $Bdd);
-
-include "./IHM/footer.php";
+    include "./IHM/footer.php";
