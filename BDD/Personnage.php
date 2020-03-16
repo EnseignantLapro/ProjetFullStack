@@ -1,5 +1,7 @@
 <?php
 
+
+// Dev By Fresi et Wantelez
 class Personnage
 {
 
@@ -28,22 +30,29 @@ class Personnage
     }
 
 
+    // Dev By Fresi
     //Accesseur
     function GetID()
     {
         return $this->_Id;
     }
 
+    // Dev By Fresi
+    // Fonction qui renvoie la valeur de la vie
     function GetVie()
     {
         return $this->_Vie;
     }
 
+    // Dev By Fresi
+    // Fonction pour changer de Pseudo
     function SetPseudo($NouveauSpoeudo)
     {
         return $this->_Pseudo = $NouveauSpoeudo;
     }
 
+    // Dev By Fresi
+    // Fonction qui affiche les statistiques d'un personnage
     public function AfficherStats()
     {
 
