@@ -10,6 +10,11 @@ class Personnage{
     public function __construct($IdDuPseudo)
     {
         $this->_Id = $IdDuPseudo;
+        $bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
+        $DataPersonnage = $bdd->query("SELECT * from personnage where id =".$IdDuPseudo."");
+        $TabDataPersonnage = $DataPersonnage->fetch();
+        $this->_Vie = $TabDataPersonnage['vie'];
+        $this->_Attaque = $TabDataPersonnage['attaque']; 
 
         //go to base chercher les info du personnages par id
 
@@ -21,14 +26,11 @@ class Personnage{
         $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
         // Dev By Wantelez
-     public function Attaque() {
+     public function Attaque($IdAgresseur, $IdVictime) {
 
-
-    }
-
-
-
-
+        $bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
+  
+     }
     //Accesseur
     function GetID()
     {
