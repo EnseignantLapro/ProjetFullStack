@@ -9,11 +9,12 @@ class Personnage
     private $_Pseudo;
     private $_Vie;
     private $_Attaque;
+    private $_Bdd;
 
     public function __construct($IdDuPseudo)
     {
-        $bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
-        $DataPersonnage = $bdd->query("SELECT * from personnage where id =".$IdDuPseudo."");
+        $this->_Bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$name.'; charset=utf8', '' . $id . '', '' . $mdp . '');
+        $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =".$IdDuPseudo."");
         $TabDataPersonnage = $DataPersonnage->fetch();
         $this->_Id = $IdDuPseudo;
         $this->_Vie = $TabDataPersonnage['vie'];
@@ -28,12 +29,6 @@ class Personnage
         $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
         $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
-    // Dev By Wantelez
-    public function Attaque()
-    {
-
-    }
-
 
     // Dev By Fresi
     //Accesseur
