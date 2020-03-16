@@ -1,8 +1,8 @@
 <?php
 //DEV BY WANTELEZ LE 12/03/84
-
 include "../BDD/Personnage.php";
 
+class attaque {
 
 function attaque() {
 
