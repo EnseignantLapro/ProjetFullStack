@@ -61,6 +61,6 @@ class Personnage
     public function AfficherStats()
     {
 
-        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " PV et " . $this->_attaque . " d'attaque";
+        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_attaque . " d'attaque";
     }
 }
