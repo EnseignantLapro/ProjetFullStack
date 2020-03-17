@@ -1,5 +1,5 @@
-<?php include "./BDD/API.php";
-      include "./IHM/API.php";
+<?php include "../BDD/Hero.php";
+      
 
     
     
@@ -7,16 +7,17 @@
     $_POST['combat'] = 1;
     $_POST['idperso1'] = 2;
     $_POST['idperso2'] = 3;
+    $bdd=null;
    
 
     if(isset($_POST['combat'])&&isset($_POST['idperso1'])&&isset($_POST['idperso2']))
     {
         //prochainement : requete sql qui récupèrera les infos des deux persos qui se battent 
 
-        $persotemp1= new Personnage(3);
-        $persotemp2= new Personnage(2);
+        $persotemp1= new Hero(3,$bdd);
+        $persotemp2= new Hero(2,$bdd);
 
-        Attaque($persotemp2,$persotemp1); //le premier id est celui de l'agresseur 
+        $persotemp1->AttaqueMob($persotemp2); //le premier id est celui de l'agresseur 
        
         $vieperso1 =  $persotemp1->getvie(); //on récupère la vie des deux personnages, ce sont les informations à retourner
         $vieperso2 =  $persotemp2->getvie();
@@ -30,7 +31,7 @@
     {
         //prochainement : requete sql qui récupèrera l'id du personnage en question
 
-        $persotemp1= new Personnage(4);
+        $persotemp1= new Hero(4,$bdd);
 
         $id = GetID(); 
 
@@ -44,7 +45,7 @@
     {
         //prochainement : requete sql qui récupèrera les l'id du personnage en question pour avoir toutes ses infos
 
-        $persotemp1= new Personnage(6);
+        $persotemp1= new Hero(6,$bdd);
 
         $chainearenvoyer= $persotemp1->AfficherStats(); 
 
@@ -57,7 +58,7 @@
     {
         //prochainement : requete sql qui récupèrera l'id du personnage en question pour avoir son pseudo
 
-        $persotemp1= new Personnage(5);
+        $persotemp1= new Hero(5,$bdd);
 
         $nvpseudo = SetPseudo($_POST['nouveaupseudo']);
 
