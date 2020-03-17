@@ -14,11 +14,19 @@ class Hero
     public function __construct($IdDuPseudo, $Bdd)
     {
         $this->_Bdd = $Bdd;
-        $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =" . $IdDuPseudo . "");
-        $TabDataPersonnage = $DataPersonnage->fetch();
-        $this->_Id = $IdDuPseudo;
-        $this->_Vie = $TabDataPersonnage['vie'];
-        $this->_Attaque = $TabDataPersonnage['attaque'];
+        //Langlace ce rajoute un control si la bdd existe pas je la simule
+        if(!is_null($Bdd)){
+            $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =" . $IdDuPseudo . "");
+            $TabDataPersonnage = $DataPersonnage->fetch();
+            $this->_Id = $IdDuPseudo;
+            $this->_Vie = $TabDataPersonnage['vie'];
+            $this->_Attaque = $TabDataPersonnage['attaque'];
+        }else{
+            $this->_Id = 0;
+            $this->_Vie = 10;
+            $this->_Attaque = 10;
+        }
+        
 
         //go to base chercher les info du personnages par id
 
@@ -39,8 +47,10 @@ class Hero
         $TabdDataMonstre = $DataMonstre->fetch();
 
         // on lui soustrais l'attaque du héro
-        $NewVieMonstre = $TabdDataMonstre[/*vie*/] - $this->_Attaque;
-
+        //Langlace ne compile pas je met en commentaire
+        //$NewVieMonstre = $TabdDataMonstre[/*vie*/] - $this->_Attaque;
+        //et je simule
+        $NewVieMonstre = 10;
             // Si ça est inférieure à 0 ou null alors il est mort
         if ($NewVieMonstre <= 0) {
 
