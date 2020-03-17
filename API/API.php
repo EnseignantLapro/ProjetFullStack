@@ -1,5 +1,5 @@
-<?php include "../BDD/API.php";
-      include "../IHM/API.php";
+<?php include "./BDD/API.php";
+      include "./IHM/API.php";
 
     
     
@@ -26,7 +26,7 @@
         echo $jsonretour;
     }
     
-    if(isset($_POST['getid'])&&isset($_POST['idperso1'])
+    if(isset($_POST['getid'])&&isset($_POST['idperso1']))
     {
         //prochainement : requete sql qui récupèrera l'id du personnage en question
 
@@ -59,7 +59,7 @@
 
         $persotemp1= new Personnage(5);
 
-        $nvpseudo = SetPseudo($_POST['nouveaupseudo'])
+        $nvpseudo = SetPseudo($_POST['nouveaupseudo']);
 
         $jsonretour = "{nouveaupseudo}";
         echo $jsonretour;
