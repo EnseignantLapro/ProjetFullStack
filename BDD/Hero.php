@@ -43,8 +43,8 @@ class Hero
     public function AttaqueMob($IdMob)
     {
         // on selectionne la vie du monstre
-        $DataMonstre = $this->_Bdd->query("SELECT * from /*TableMob*/ where id =" . $IdMob . "");
-        $TabdDataMonstre = $DataMonstre->fetch();
+        //$DataMonstre = $this->_Bdd->query("SELECT * from /*TableMob*/ where id =" . $IdMob . "");
+        //$TabdDataMonstre = $DataMonstre->fetch();
 
         // on lui soustrais l'attaque du héro
         //Langlace ne compile pas je met en commentaire
@@ -54,9 +54,9 @@ class Hero
             // Si ça est inférieure à 0 ou null alors il est mort
         if ($NewVieMonstre <= 0) {
 
-            $this->_Bdd->query("UPDATE /*TableMob*/ set etat = 'mort' WHERE idmob =" . $IdMob . "");
+            //$this->_Bdd->query("UPDATE /*TableMob*/ set etat = 'mort' WHERE idmob =" . $IdMob . "");
         } else {
-            $this->_Bdd->query("UPDATE /*TableMob*/ set vie =" . $NewVieMonstre . " WHERE idmob =" . $IdMob . "");
+            //$this->_Bdd->query("UPDATE /*TableMob*/ set vie =" . $NewVieMonstre . " WHERE idmob =" . $IdMob . "");
         }
     }
 

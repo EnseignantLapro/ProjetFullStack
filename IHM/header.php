@@ -12,9 +12,10 @@ $mdpBase="";
 
 include "./config.php";
 echo "header";
-
+/*
 $Bdd = null;
 try{
+
     $Bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$nomBase.'; charset=utf8', '' . $userBase . '', '' . $mdpBase . '');
     $connect = true;
 }Catch(Exception $e){
@@ -22,7 +23,7 @@ try{
         $connect = false;
 
     }
-
+*/
 //on simule une connexion tjs valide
 $connect = true;
 
