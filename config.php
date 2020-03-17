@@ -1,5 +1,5 @@
 <?php $adresse="127.0.0.1"; 
-$nomBase = "projetfullstack";
+$nomBase = "bdd_fulls";
 $userBase ="root";
 $mdpBase="";
 
