@@ -33,7 +33,7 @@ include "config.php";
     } else if ($connect == false) {
     }
 
-$Perso1 = new Hero(0, $Bdd);
+//$Perso1 = new Hero(0, $Bdd);
 
 
     include "./IHM/footer.php";
