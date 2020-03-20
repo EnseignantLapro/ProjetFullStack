@@ -22,9 +22,12 @@
         $vieperso1 =  $persotemp1->getvie(); //on récupère la vie des deux personnages, ce sont les informations à retourner
         $vieperso2 =  $persotemp2->getvie();
         
+        $life = array('vie1' => $vieperso1, 'vie2' => $vieperso2);
 
-        $jsonretour = "{_Vie:vieperso1,_Vie:vieperso2}";
-        echo $jsonretour;
+        //$jsonretour = "{_Vie:vieperso1,_Vie:vieperso2}";
+        //echo $jsonretour;
+
+        echo json_encode($life);
     }
     
     if(isset($_POST['getid'])&&isset($_POST['idperso1']))
@@ -35,8 +38,12 @@
 
         $id = GetID(); 
 
-        $jsonretour = "{_Id:id}";
-        echo $jsonretour;
+        $tabid = array('idperso' => $id);
+
+        //$jsonretour = "{_Id:id}";
+        //echo $jsonretour;
+
+        echo json_encode($tabid);
 
 
     }
@@ -49,8 +56,14 @@
 
         $chainearenvoyer= $persotemp1->AfficherStats(); 
 
-        $jsonretour = "{chainearenvoyer}";
-        echo $jsonretour;
+        $chaine = array('stats' => $chainearenvoyer);
+
+        //$jsonretour = "{chainearenvoyer}";
+        //echo $jsonretour;
+
+        echo json_encode($chaine);
+
+
 
     }
 
@@ -62,8 +75,12 @@
 
         $nvpseudo = SetPseudo($_POST['nouveaupseudo']);
 
-        $jsonretour = "{nouveaupseudo}";
-        echo $jsonretour;
+        $tabpseudo = array('pseudo' => $nvpseudo);
+
+        //$jsonretour = "{nouveaupseudo}";
+        //echo $jsonretour;
+
+        echo json_encode($tabpseudo);
 
 
     }
