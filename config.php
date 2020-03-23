@@ -1,4 +1,4 @@
-<?php $adresse="127.0.0.1"; 
+<?php $adresse="localhost"; 
 $nomBase = "projetfullstack";
 $userBase ="root";
 $mdpBase="";
