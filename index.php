@@ -1,5 +1,5 @@
 <?php
-
+//pute
 include "./IHM/header.php";
 include "config.php";
 
