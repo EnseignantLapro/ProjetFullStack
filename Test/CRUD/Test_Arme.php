@@ -2,7 +2,7 @@
 require "../../BDD/Arme.php";
 include "../../config.php";
 
-//récupération de la liste des armes en BDD.
+//récupération de la liste des armes en BDD + config de co.
 
 
 
@@ -10,6 +10,7 @@ $Bdd = null;
 try {
     $Bdd = new PDO('mysql:host=' . $adresse . '; dbname=' . $nomBase . '; charset=utf8', '' . $userBase . '', '' . $mdpBase . '');
     $connect = true;
+    //On récupere les armes dans un tableau
     $DonneeBruteArme = $Bdd->query("SELECT * FROM arme");
     $TabArmeIndex = 0; //équivalent de [i] en C
     while ($tab = $DonneeBruteArme->fetch()) {
@@ -43,7 +44,7 @@ $connect = true;
 
 <body>
 
-    <!-- Menu -->
+    <!-- Menu avec boostrap, #1 #2 #3 sont les onglets du menu -->
 
     <nav>
         <ul class="nav nav-pills">
@@ -55,7 +56,7 @@ $connect = true;
     </nav>
 
 
-    <!-- Choix de l'arme -->
+    <!-- Choix de l'arme, onglet #1 -->
     <div class="tab-content">
         <div class="tab-pane active" class="Arme" id="1">
             <div class="row">
@@ -73,7 +74,7 @@ $connect = true;
                                             <select name="arme" id="">
 
                                                 <?php
-                                                //parcours du tableau de User pour afficher les options de la liste déroulante
+                                                //parcours du tableau d'Arme pour afficher les options de la liste déroulante
                                                 foreach ($TabArme as $objetArme) {
                                                     echo '<option value="' . $objetArme->getId() . '">' . $objetArme->getNom() . '</option>';
                                                 }
@@ -83,11 +84,12 @@ $connect = true;
                                         </form>
 
                                         <?php
+                                        //traitement de la liste déroulante de l'arme a sélectionner 
                                         if (isset($_POST["arme"])) {
                                             //recherche de l'id dans le tableau de Arme
                                             foreach ($TabArme as $objetArme) {
                                                 if ($objetArme->getId() == $_POST["arme"]) {
-                                                    $objetArme->AfficheArme();
+                                                    $objetArme->AfficheArme();//Appel de la méthode Affiche arme
                                                 }
                                             }
                                         } else {
@@ -105,7 +107,7 @@ $connect = true;
 
 
 
-        <!-- Suppression des armes -->
+        <!-- Suppression des armes onglet #2 -->
         <div class="tab-pane" class="Arme" id="2">
             <div class="row">
                 <div class="text-center">
@@ -120,6 +122,7 @@ $connect = true;
                                         <div class="panel-body">
                                             <FORM action="" method="POST">
                                                 <?php
+                                                 //parcours du tableau d'Arme pour delete a partir d'une checkbox
                                                 foreach ($TabArme as $objetArme) {
                                                     echo '<p><input type="checkbox" value="' . $objetArme->getId() . '" name="Arme[]" />';
                                                     echo '<label for="coding">  ' .  $objetArme->getNom() . ' </label></p>';
@@ -129,13 +132,14 @@ $connect = true;
                                             </FORM>
 
                                             <?php
+                                            //Traitement checkbox pour delete l'arme sélectionner
                                             if (isset($_POST["Arme"])) {
                                                 foreach ($_POST['Arme'] as $idArme) {
 
                                                     $j = 0;
                                                     foreach ($TabArme as $objetArme) {
                                                         if ($objetArme->getId() == $idArme) {
-                                                            $objetArme->deleteArme();
+                                                            $objetArme->deleteArme();//Appel de la méthode pour delete arme
 
                                                             //j'en profite pour le retirer de mon tableau. car il sera supprimé à l'affichage
                                                             unset($TabArme[$j]);
@@ -158,7 +162,7 @@ $connect = true;
         </div>
 
 
-        <!-- Craft armes -->
+        <!-- Craft armes onglet #3 -->
         <div class="tab-pane" class="Arme" id="3">
 
 
@@ -174,6 +178,7 @@ $connect = true;
                                         <h1 class="panel-title">Craft ton arme:</h1>
                                     </div>
                                     <div class="panel-body">
+                                         <!-- Formulaire dans le but de crafter une arme (pas fini)-->
                                         <FORM role="form" action="" method="POST">
                                             <input type="text" name="nomArme" placeholder="Nom de l'arme a crafter" />
                                             <input type="submit" value="Crafter"></input>
