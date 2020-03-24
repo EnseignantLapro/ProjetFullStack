@@ -6,57 +6,55 @@ class Hero
 {
 
     private $_Id;
-    private $_Vie;
+    private $_VieMob;
     private $_Attaque;
     private $_Bdd;
+    private $_Vie;
 
 
     public function __construct($IdDuPseudo, $Bdd)
     {
         $this->_Bdd = $Bdd;
-        //Langlace ce rajoute un control si la bdd existe pas je la simule
+        //rajoute un control si la bdd existe pas je la simule
         if(!is_null($Bdd)){
-            $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =" . $IdDuPseudo . "");
+              //go to base chercher les info du personnages par id
+            $DataPersonnage = $this->_Bdd->query("SELECT * from assoshero where id_assoshero =" . $IdDuPseudo . "");
             $TabDataPersonnage = $DataPersonnage->fetch();
             $this->_Id = $IdDuPseudo;
-            $this->_Vie = $TabDataPersonnage['vie'];
+            $this->_Vie = $TabDataPersonnage['pdv'];
             $this->_Attaque = $TabDataPersonnage['attaque'];
         }else{
+            //verifier que id est coorrect sinon simulé un perso
             $this->_Id = 0;
-            $this->_Vie = 10;
-            $this->_Attaque = 10;
+            $this->_VieMob = 1000;
+            $this->_Attaque = 50;
         }
-        
-
-        //go to base chercher les info du personnages par id
-
-
-        //verifier que id est coorrect sinon simulé un perso
-
-        $this->_Pseudo = "Perso Simulé N°" . $IdDuPseudo;
-        $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
-        $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
 
     // Dev by Wantelez Florian //
     // Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
     public function AttaqueMob($IdMob)
     {
-        // on selectionne la vie du monstre
-        //$DataMonstre = $this->_Bdd->query("SELECT * from /*TableMob*/ where id =" . $IdMob . "");
-        //$TabdDataMonstre = $DataMonstre->fetch();
+        //on selectionne la vie du monstre
+        $DataMonstre = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdMob . "");
+        $TabdDataMonstre = $DataMonstre->fetch();
 
         // on lui soustrais l'attaque du héro
-        //Langlace ne compile pas je met en commentaire
-        //$NewVieMonstre = $TabdDataMonstre[/*vie*/] - $this->_Attaque;
-        //et je simule
-        $NewVieMonstre = 10;
+        $NewVieMonstre = $TabdDataMonstre['pdv'] - $this->_Attaque;
+
             // Si ça est inférieure à 0 ou null alors il est mort
         if ($NewVieMonstre <= 0) {
 
-            //$this->_Bdd->query("UPDATE /*TableMob*/ set etat = 'mort' WHERE idmob =" . $IdMob . "");
+            $this->_Bdd->query("UPDATE mob set etat = 0 WHERE idmob =" . $IdMob . "");
+            $this->_Bdd->query("UPDATE mob set vie = 0 WHERE idmob =" . $IdMob . "");
+            $this->_VieMob = 0;
         } else {
-            //$this->_Bdd->query("UPDATE /*TableMob*/ set vie =" . $NewVieMonstre . " WHERE idmob =" . $IdMob . "");
+            $this->_Bdd->query("UPDATE mob set pdv =" . $NewVieMonstre . " WHERE id_mob =" . $IdMob . "");
+            $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob = ".$IdMob."");
+            $TabDataMob = $DataMob->fetch();
+            $this->_VieMob = $TabDataMob['pdv'];
+
+
         }
     }
 
@@ -69,9 +67,9 @@ class Hero
 
     // Dev By Fresi
     // Fonction qui renvoie la valeur de la vie
-    function GetVie()
+    function GetVieMob()
     {
-        return $this->_Vie;
+        return $this->_VieMob;
     }
 
     // Dev By Fresi
