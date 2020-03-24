@@ -16,14 +16,18 @@ class Hero
     {
         $this->_Bdd = $Bdd;
         //rajoute un control si la bdd existe pas je la simule
-        if(!is_null($Bdd)){
-              //go to base chercher les info du personnages par id
+        if (!is_null($Bdd)) {
+            //go to base chercher les info du personnages par id
             $DataPersonnage = $this->_Bdd->query("SELECT * from assoshero where id_assoshero =" . $IdDuPseudo . "");
             $TabDataPersonnage = $DataPersonnage->fetch();
             $this->_Id = $IdDuPseudo;
             $this->_Vie = $TabDataPersonnage['pdv'];
             $this->_Attaque = $TabDataPersonnage['attaque'];
-        }else{
+            $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdDuPseudo . "");
+            $TabDataMob = $DataMob->fetch();
+            $this->_VieMob = $TabDataMob['pdv'];
+
+        } else {
             //verifier que id est coorrect sinon simulé un perso
             $this->_Id = 0;
             $this->_VieMob = 1000;
@@ -42,20 +46,24 @@ class Hero
         // on lui soustrais l'attaque du héro
         $NewVieMonstre = $TabdDataMonstre['pdv'] - $this->_Attaque;
 
-            // Si ça est inférieure à 0 ou null alors il est mort
+        // Si ça est inférieure à 0 ou null alors il est mort on passe son état 0
         if ($NewVieMonstre <= 0) {
 
-            $this->_Bdd->query("UPDATE mob set etat = 0 WHERE idmob =" . $IdMob . "");
-            $this->_Bdd->query("UPDATE mob set vie = 0 WHERE idmob =" . $IdMob . "");
+            $this->_Bdd->query("UPDATE mob set etat = 0 WHERE id_mob =" . $IdMob . "");
+            $this->_Bdd->query("UPDATE mob set pdv = 0 WHERE id_mob =" . $IdMob . "");
             $this->_VieMob = 0;
         } else {
+            // Sinon on acualise ses point de vie à ses points de vie moins les dégats de l'attaquant
             $this->_Bdd->query("UPDATE mob set pdv =" . $NewVieMonstre . " WHERE id_mob =" . $IdMob . "");
-            $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob = ".$IdMob."");
+            $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob = " . $IdMob . "");
             $TabDataMob = $DataMob->fetch();
             $this->_VieMob = $TabDataMob['pdv'];
-
-
         }
+    }
+    // Fonction qui permet de remettre les points de vie à 100
+    public function ResetHp($IdMob)
+    {
+        $this->_Bdd->query("UPDATE mob set pdv = 100 WHERE id_mob=" . $IdMob . "");
     }
 
     // Dev By Fresi
@@ -70,6 +78,7 @@ class Hero
     function GetVieMob()
     {
         return $this->_VieMob;
+
     }
 
     // Dev By Fresi
