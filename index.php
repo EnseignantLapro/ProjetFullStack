@@ -1,6 +1,6 @@
 <?php
 
-include "./IHM/header.php";
+include "IHM/header.php";
 include "config.php";
 
 /*if(isset($_GET['map'])){
