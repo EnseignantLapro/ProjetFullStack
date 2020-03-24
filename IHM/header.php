@@ -1,7 +1,7 @@
 <?php 
 //session
 
-include "../config.php";
+include "./config.php";
 
 echo "<div> header </div>";
 
