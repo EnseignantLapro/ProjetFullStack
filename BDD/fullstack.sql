@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 24 mars 2020 à 18:19
+-- Généré le :  mar. 24 mars 2020 à 20:22
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS `arme` (
   `id_arme` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(15) NOT NULL,
   `prix` float NOT NULL,
-  `durabilite` int(11) NOT NULL,
   `bonus_degat` int(11) NOT NULL,
   PRIMARY KEY (`id_arme`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
@@ -42,8 +41,22 @@ CREATE TABLE IF NOT EXISTS `arme` (
 -- Déchargement des données de la table `arme`
 --
 
-INSERT INTO `arme` (`id_arme`, `nom`, `prix`, `durabilite`, `bonus_degat`) VALUES
-(1, 'NULL', 0, 0, 0);
+INSERT INTO `arme` (`id_arme`, `nom`, `prix`, `bonus_degat`) VALUES
+(1, 'NULL', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `armure`
+--
+
+DROP TABLE IF EXISTS `armure`;
+CREATE TABLE IF NOT EXISTS `armure` (
+  `id_armure` int(11) NOT NULL AUTO_INCREMENT,
+  `bonus_armure` int(11) NOT NULL,
+  `prix` int(11) NOT NULL,
+  PRIMARY KEY (`id_armure`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -60,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `assoshero` (
   `potion` int(11) NOT NULL,
   `pdv` float NOT NULL,
   `attaque` float NOT NULL,
-  `defense` float NOT NULL,
+  `id_armure` float NOT NULL,
   `niveau` int(11) NOT NULL,
   PRIMARY KEY (`id_assoshero`),
   UNIQUE KEY `id_user_2` (`id_user`,`id_hero`,`id_arme`),
@@ -74,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `assoshero` (
 -- Déchargement des données de la table `assoshero`
 --
 
-INSERT INTO `assoshero` (`id_assoshero`, `id_user`, `id_hero`, `id_arme`, `potion`, `pdv`, `attaque`, `defense`, `niveau`) VALUES
+INSERT INTO `assoshero` (`id_assoshero`, `id_user`, `id_hero`, `id_arme`, `potion`, `pdv`, `attaque`, `id_armure`, `niveau`) VALUES
 (1, 1, 2, 1, 0, 650, 20, 30, 1);
 
 -- --------------------------------------------------------
@@ -99,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `mob` (
 --
 
 INSERT INTO `mob` (`id_mob`, `nom`, `pdv`, `attaque`, `defence`, `etat`) VALUES
-(1, 'Dragon', 3695, 80, 180, 1);
+(1, 'Dragon', 100, 80, 180, 0);
 
 -- --------------------------------------------------------
 
@@ -114,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `typehero` (
   `id_arme` int(11) NOT NULL,
   `pdv` float NOT NULL,
   `attaque` float NOT NULL,
-  `defence` float NOT NULL,
+  `id_armure` int(11) NOT NULL,
   `categorie` int(11) NOT NULL,
   PRIMARY KEY (`id_hero`),
   KEY `id_arme` (`id_arme`)
@@ -124,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `typehero` (
 -- Déchargement des données de la table `typehero`
 --
 
-INSERT INTO `typehero` (`id_hero`, `nom`, `id_arme`, `pdv`, `attaque`, `defence`, `categorie`) VALUES
+INSERT INTO `typehero` (`id_hero`, `nom`, `id_arme`, `pdv`, `attaque`, `id_armure`, `categorie`) VALUES
 (2, 'Ashe', 1, 650, 20, 30, 1);
 
 -- --------------------------------------------------------
