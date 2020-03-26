@@ -74,7 +74,7 @@ class Hero
             // Sinon on acualise ses point de vie à ses points de vie moins les dégats de l'attaquant
             $this->_Bdd->query("UPDATE mob set pdv =" . $NewVieHero . " WHERE id_mob =" . $IdHero . "");
             $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob = " . $IdHero . "");
-            $TabDataMob = $DataMob->fetch();
+            $TabDataHero = $DataMob->fetch();
             $this->_VieHero = $TabDataHero['pdv'];
         }
 
@@ -101,15 +101,17 @@ class Hero
 
     // Dev By Fresi
     // Fonction pour changer de Pseudo
-    function SetPseudo($NouveauSpoeudo)
+    function SetPseudo($NouveauPseudo)
     {
-        return $this->_Pseudo = $NouveauSpoeudo;
+        return $this->_NomPerso = $NouveauPseudo;
     }
 
     // Dev By Fresi
     // Fonction qui affiche les statistiques d'un personnage
     public function AfficherStats()
     {
+        echo "Votre pseudo est " . $this->_NomHero . " Vous avez " . $this->_Vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
+    }
 
         echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
     }
