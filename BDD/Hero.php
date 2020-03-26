@@ -25,7 +25,7 @@ class Hero
             $DataPersonnage = $this->_Bdd->query("SELECT * from assoshero where id_assoshero =" . $IdDuPseudo . "");
             $TabDataPersonnage = $DataPersonnage->fetch();
             $this->_Id = $IdDuPseudo;
-            $this->_VieHero = $TabDataPersonnage['pdv'];
+            $this->_Vie = $TabDataPersonnage['pdv'];
             $this->_AttaqueHero = $TabDataPersonnage['attaque'];
             $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdDuPseudo . "");
             $TabDataMob = $DataMob->fetch();
@@ -123,8 +123,20 @@ class Hero
     // Fonction qui affiche les statistiques d'un personnage
     public function AfficherStats()
     {
-        echo "Votre pseudo est " . $this->_NomHero . " Vous avez " . $this->_Vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
-    
-        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
+        echo "Votre pseudo est " . $this->_NomHero . " vous avez " . $this->_Vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
+    }
+
+    // Dev By Fresi
+    // Fonction qui renvoie l'arme d'un personnage
+    public function AfficherArme()
+    {
+        return $this->_Arme;
+    }
+
+    // Dev By Fresi
+    // Fonction qui renvoie l'armure d'un personnage
+    public function AfficherArmure()
+    {
+        return $this->_Armure;
     }
 }
