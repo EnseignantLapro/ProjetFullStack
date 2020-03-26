@@ -11,7 +11,7 @@ class Hero
     private $_Bdd;
     private $_Vie;
     private $_User;
-    private $_NomPerso;
+    private $_NomHero;
     private $_Arme;
     private $_Armure;
 
@@ -30,14 +30,14 @@ class Hero
             $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdDuPseudo . "");
             $TabDataMob = $DataMob->fetch();
             $this->_VieMob = $TabDataMob['pdv'];
-            $DataPerso = $this->_Bdd->query("SELECT * from user where id_user =" . $IdDuPseudo . "");
-            $TabDataUser = $DataPerso->fetch();
+            $DataUser = $this->_Bdd->query("SELECT * from user where id_user =" . $IdDuPseudo . "");
+            $TabDataUser = $DataUser->fetch();
             $this->_NomHero = $TabDataUser['pseudo'];
-            $DataPerso = $this->_Bdd->query("SELECT * from arme where id_arme = " . $IdDuPseudo . "");
-            $TabdDataPerso = $DataPerso->fetch();
+            $DataArme = $this->_Bdd->query("SELECT * from arme where id_arme = " . $IdDuPseudo . "");
+            $TabdDataPerso = $DataArme->fetch();
             $this->_Arme = $TabdDataPerso['nom'];
-            $DataPerso = $this->_Bdd->query("SELECT * from armure where id_armure = " . $IdDuPseudo . "");
-            $TabdDataPerso = $DataPerso->fetch();
+            $DataArmure = $this->_Bdd->query("SELECT * from armure where id_armure = " . $IdDuPseudo . "");
+            $TabdDataPerso = $DataArmure->fetch();
             $this->_Armure = $TabdDataPerso['bonus_armure'];
 
         } else {
@@ -98,7 +98,7 @@ class Hero
     // Fonction pour changer de Pseudo
     function SetPseudo($NouveauPseudo)
     {
-        return $this->_NomPerso = $NouveauPseudo;
+        return $this->_NomHero = $NouveauPseudo;
     }
 
     // Dev By Fresi
