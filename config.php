@@ -3,7 +3,5 @@ $nomBase = "projetfullstack";
 $userBase ="root";
 $mdpBase="";
 
-$Bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$nomBase.'; charset=utf8', '' . $userBase . '', '' . $mdpBase . '');
-
 
 ?>

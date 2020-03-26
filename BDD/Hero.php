@@ -14,11 +14,19 @@ class Hero
     public function __construct($IdDuPseudo, $Bdd)
     {
         $this->_Bdd = $Bdd;
-        $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =" . $IdDuPseudo . "");
-        $TabDataPersonnage = $DataPersonnage->fetch();
-        $this->_Id = $IdDuPseudo;
-        $this->_Vie = $TabDataPersonnage['vie'];
-        $this->_Attaque = $TabDataPersonnage['attaque'];
+        //Langlace ce rajoute un control si la bdd existe pas je la simule
+        if(!is_null($Bdd)){
+            $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =" . $IdDuPseudo . "");
+            $TabDataPersonnage = $DataPersonnage->fetch();
+            $this->_Id = $IdDuPseudo;
+            $this->_Vie = $TabDataPersonnage['vie'];
+            $this->_Attaque = $TabDataPersonnage['attaque'];
+        }else{
+            $this->_Id = 0;
+            $this->_Vie = 10;
+            $this->_Attaque = 10;
+        }
+        
 
         //go to base chercher les info du personnages par id
 
@@ -30,7 +38,7 @@ class Hero
         $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
     }
 
-    // Dev by Wantelez Florian 
+    // Dev by Wantelez Florian //
     // Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
     public function AttaqueMob($IdMob)
     {
