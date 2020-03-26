@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 26 mars 2020 à 11:01
+-- Généré le :  jeu. 26 mars 2020 à 20:34
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projetfullstack`
+-- Base de données :  `fullstack`
 --
 
 -- --------------------------------------------------------
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `arme` (
   `id_arme` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(15) NOT NULL,
   `prix` float NOT NULL,
-  `bonus_durabilite` int(11) NOT NULL,
+  `durabilite` int(11) NOT NULL,
   `bonus_degat` int(11) NOT NULL,
   PRIMARY KEY (`id_arme`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `armure` (
   `id_armure` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL,
   `prix` float NOT NULL,
-  `bonus_durabilite` int(11) NOT NULL,
+  `durabilite` int(11) NOT NULL,
   `bonus_defence` int(11) NOT NULL,
   PRIMARY KEY (`id_armure`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `hero` (
   `potion` int(11) NOT NULL,
   `pdv` int(11) NOT NULL,
   `attaque` int(11) NOT NULL,
-  `defense` int(11) NOT NULL,
+  `id_armure` int(11) NOT NULL,
   `niveau` int(11) NOT NULL,
   PRIMARY KEY (`id_hero`),
   KEY `id_typehero` (`id_typehero`,`id_entite`),
