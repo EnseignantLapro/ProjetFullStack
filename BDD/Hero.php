@@ -27,6 +27,7 @@ class Hero
             $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdDuPseudo . "");
             $TabDataMob = $DataMob->fetch();
             $this->_VieMob = $TabDataMob['pdv'];
+            $this->_AttaqueMob = $TabDataMob['attaque'];
         } else {
             //verifier que id est coorrect sinon simulé un perso
             $this->_Id = 0;
@@ -67,15 +68,15 @@ class Hero
         $NewVieHero = $this->_VieHero - $this->_AttaqueMob;
         if ($NewVieHero <= 0) {
 
-            $this->_Bdd->query("UPDATE eta set etat = 0 WHERE id_mob =" . $IdHero . "");
-            $this->_Bdd->query("UPDATE eta set pdv = 0 WHERE id_mob =" . $IdHero . "");
-            $this->_VieMob = 0;
+            $this->_Bdd->query("UPDATE eta set etat = 0 WHERE id_assoshero =" . $IdHero . "");
+            $this->_Bdd->query("UPDATE eta set pdv = 0 WHERE id_assoshero =" . $IdHero . "");
+            $this->_VieHero = 0;
         } else {
             // Sinon on acualise ses point de vie à ses points de vie moins les dégats de l'attaquant
-            $this->_Bdd->query("UPDATE mob set pdv =" . $NewVieHero . " WHERE id_mob =" . $IdHero . "");
+            $this->_Bdd->query("UPDATE assoshero set pdv =" . $NewVieHero . " WHERE id_assoshero =" . $IdHero . "");
             $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob = " . $IdHero . "");
-            $TabDataHero = $DataMob->fetch();
-            $this->_VieHero = $TabDataHero['pdv'];
+            $TabDataMob = $DataMob->fetch();
+            $this->_VieHero = $TabDataMob['pdv'];
         }
 
     }
@@ -111,7 +112,7 @@ class Hero
     public function AfficherStats()
     {
         echo "Votre pseudo est " . $this->_NomHero . " Vous avez " . $this->_Vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
-    }
+    
 
         echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
     }
