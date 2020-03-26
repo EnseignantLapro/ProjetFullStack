@@ -1,6 +1,5 @@
 <?php
 
-
 // Dev By Fresi et Wantelez
 class Hero
 {
@@ -16,30 +15,36 @@ class Hero
     private $_Armure;
 
 
-    public function __construct($IdDuPseudo, $Bdd)
+    public function __construct($IdUser, $Bdd)
     {
         $this->_Bdd = $Bdd;
         //rajoute un control si la bdd existe pas je la simule
         if (!is_null($Bdd)) {
-            //go to base chercher les info du personnages par id
-            $DataPersonnage = $this->_Bdd->query("SELECT * from assoshero where id_assoshero =" . $IdDuPseudo . "");
-            $TabDataPersonnage = $DataPersonnage->fetch();
+            //go to base chercher les toute les info en fonction de l'id
+            $DataHero = $this->_Bdd->query("SELECT * from assoshero where id_assoshero =" . $IdUser. "");
+            $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdUser . "");
+            $DataUser = $this->_Bdd->query("SELECT * from user where id_user =" . $IdUser . "");
+            $DataArme = $this->_Bdd->query("SELECT * from arme where id_arme = " . $IdUser . "");
+            $DataArmure = $this->_Bdd->query("SELECT * from armure where id_armure = " . $IdUser . "");
+
+ $TabDataHero = $DataHeo->fetch();
+
+
             $this->_Id = $IdDuPseudo;
             $this->_Vie = $TabDataPersonnage['pdv'];
             $this->_AttaqueHero = $TabDataPersonnage['attaque'];
-            $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdDuPseudo . "");
+
             $TabDataMob = $DataMob->fetch();
             $this->_VieMob = $TabDataMob['pdv'];
-            $DataUser = $this->_Bdd->query("SELECT * from user where id_user =" . $IdDuPseudo . "");
+
             $TabDataUser = $DataUser->fetch();
             $this->_NomHero = $TabDataUser['pseudo'];
-            $DataArme = $this->_Bdd->query("SELECT * from arme where id_arme = " . $IdDuPseudo . "");
+
             $TabdDataPerso = $DataArme->fetch();
             $this->_Arme = $TabdDataPerso['nom'];
-            $DataArmure = $this->_Bdd->query("SELECT * from armure where id_armure = " . $IdDuPseudo . "");
+
             $TabdDataPerso = $DataArmure->fetch();
             $this->_Armure = $TabdDataPerso['bonus_armure'];
-
         } else {
             //verifier que id est coorrect sinon simulé un perso
             $this->_Id = 0;
@@ -76,7 +81,7 @@ class Hero
     // Dev by Wantelez Florian //
     public function AttaqueHero($IdHero)
     {
-// On retire la vie du Hero par les degats d'attaques du Mob
+        // On retire la vie du Hero par les degats d'attaques du Mob
         $NewVieHero = $this->_VieHero - $this->_AttaqueMob;
         if ($NewVieHero <= 0) {
 
@@ -90,7 +95,6 @@ class Hero
             $TabDataMob = $DataMob->fetch();
             $this->_VieHero = $TabDataMob['pdv'];
         }
-
     }
     // Fonction qui permet de remettre les points de vie à 100
     public function ResetHp($IdMob)
