@@ -9,8 +9,11 @@ class Hero
     private $_VieMob;
     private $_AttaqueHero;
     private $_Bdd;
-    private $_VieHero;
-    private $_AttaqueMob;
+    private $_Vie;
+    private $_User;
+    private $_NomHero;
+    private $_Arme;
+    private $_Armure;
 
 
     public function __construct($IdDuPseudo, $Bdd)
@@ -27,7 +30,16 @@ class Hero
             $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdDuPseudo . "");
             $TabDataMob = $DataMob->fetch();
             $this->_VieMob = $TabDataMob['pdv'];
-            $this->_AttaqueMob = $TabDataMob['attaque'];
+            $DataUser = $this->_Bdd->query("SELECT * from user where id_user =" . $IdDuPseudo . "");
+            $TabDataUser = $DataUser->fetch();
+            $this->_NomHero = $TabDataUser['pseudo'];
+            $DataArme = $this->_Bdd->query("SELECT * from arme where id_arme = " . $IdDuPseudo . "");
+            $TabdDataPerso = $DataArme->fetch();
+            $this->_Arme = $TabdDataPerso['nom'];
+            $DataArmure = $this->_Bdd->query("SELECT * from armure where id_armure = " . $IdDuPseudo . "");
+            $TabdDataPerso = $DataArmure->fetch();
+            $this->_Armure = $TabdDataPerso['bonus_armure'];
+
         } else {
             //verifier que id est coorrect sinon simulé un perso
             $this->_Id = 0;
@@ -37,7 +49,7 @@ class Hero
     }
 
     // Dev by Wantelez Florian //
-    // Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
+    //  Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
     public function AttaqueMob($IdMob)
     {
         //on selectionne la vie du monstre
@@ -61,7 +73,7 @@ class Hero
             $this->_VieMob = $TabDataMob['pdv'];
         }
     }
-
+    // Dev by Wantelez Florian //
     public function AttaqueHero($IdHero)
     {
 // On retire la vie du Hero par les degats d'attaques du Mob
@@ -104,7 +116,7 @@ class Hero
     // Fonction pour changer de Pseudo
     function SetPseudo($NouveauPseudo)
     {
-        return $this->_NomPerso = $NouveauPseudo;
+        return $this->_NomHero = $NouveauPseudo;
     }
 
     // Dev By Fresi
@@ -113,7 +125,6 @@ class Hero
     {
         echo "Votre pseudo est " . $this->_NomHero . " Vous avez " . $this->_Vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
     
-
         echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
     }
 }
