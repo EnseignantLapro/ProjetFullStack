@@ -1,7 +1,7 @@
 <?php
-//DEV BY WANTELEZ LE 12/03/84
+//DEV BY WANTELEZ
 include "../BDD/Personnage.php";
-
+/* En cours de construction
 class attaque {
 
 private    
@@ -17,7 +17,7 @@ function combat($Perso1,$Perso2){
     echo "combat de ".$Perso1->afficherInfo()." et de ".$Perso2->afficherInfo();
 }
 
-
+*/
 ?>
 
 
