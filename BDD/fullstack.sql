@@ -2,10 +2,10 @@
 -- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 24 mars 2020 à 20:22
--- Version du serveur :  10.4.10-MariaDB
--- Version de PHP :  7.3.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: Mar 26, 2020 at 10:12 AM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `fullstack`
+-- Database: `fullstack`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `arme`
+-- Table structure for table `arme`
 --
 
 DROP TABLE IF EXISTS `arme`;
@@ -38,16 +38,16 @@ CREATE TABLE IF NOT EXISTS `arme` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `arme`
+-- Dumping data for table `arme`
 --
 
 INSERT INTO `arme` (`id_arme`, `nom`, `prix`, `bonus_degat`) VALUES
-(1, 'NULL', 0, 0);
+(1, 'Katana', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `armure`
+-- Table structure for table `armure`
 --
 
 DROP TABLE IF EXISTS `armure`;
@@ -56,12 +56,19 @@ CREATE TABLE IF NOT EXISTS `armure` (
   `bonus_armure` int(11) NOT NULL,
   `prix` int(11) NOT NULL,
   PRIMARY KEY (`id_armure`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `armure`
+--
+
+INSERT INTO `armure` (`id_armure`, `bonus_armure`, `prix`) VALUES
+(1, 45, 70);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `assoshero`
+-- Table structure for table `assoshero`
 --
 
 DROP TABLE IF EXISTS `assoshero`;
@@ -84,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `assoshero` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `assoshero`
+-- Dumping data for table `assoshero`
 --
 
 INSERT INTO `assoshero` (`id_assoshero`, `id_user`, `id_hero`, `id_arme`, `potion`, `pdv`, `attaque`, `id_armure`, `niveau`) VALUES
@@ -93,7 +100,7 @@ INSERT INTO `assoshero` (`id_assoshero`, `id_user`, `id_hero`, `id_arme`, `potio
 -- --------------------------------------------------------
 
 --
--- Structure de la table `mob`
+-- Table structure for table `mob`
 --
 
 DROP TABLE IF EXISTS `mob`;
@@ -108,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `mob` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `mob`
+-- Dumping data for table `mob`
 --
 
 INSERT INTO `mob` (`id_mob`, `nom`, `pdv`, `attaque`, `defence`, `etat`) VALUES
@@ -117,7 +124,7 @@ INSERT INTO `mob` (`id_mob`, `nom`, `pdv`, `attaque`, `defence`, `etat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `typehero`
+-- Table structure for table `typehero`
 --
 
 DROP TABLE IF EXISTS `typehero`;
@@ -134,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `typehero` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `typehero`
+-- Dumping data for table `typehero`
 --
 
 INSERT INTO `typehero` (`id_hero`, `nom`, `id_arme`, `pdv`, `attaque`, `id_armure`, `categorie`) VALUES
@@ -143,7 +150,7 @@ INSERT INTO `typehero` (`id_hero`, `nom`, `id_arme`, `pdv`, `attaque`, `id_armur
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -156,18 +163,18 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `pseudo`, `mail`, `mdp`) VALUES
 (1, 'Rainolf', 'floflobg1999@hotmail.fr', 'mdpsecure123');
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `assoshero`
+-- Constraints for table `assoshero`
 --
 ALTER TABLE `assoshero`
   ADD CONSTRAINT `assoshero_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
@@ -175,7 +182,7 @@ ALTER TABLE `assoshero`
   ADD CONSTRAINT `assoshero_ibfk_3` FOREIGN KEY (`id_arme`) REFERENCES `arme` (`id_arme`);
 
 --
--- Contraintes pour la table `typehero`
+-- Constraints for table `typehero`
 --
 ALTER TABLE `typehero`
   ADD CONSTRAINT `typehero_ibfk_1` FOREIGN KEY (`id_arme`) REFERENCES `arme` (`id_arme`);
