@@ -7,9 +7,13 @@ class Hero
 
     private $_Id;
     private $_VieMob;
-    private $_Attaque;
+    private $_AttaqueHero;
     private $_Bdd;
     private $_Vie;
+    private $_User;
+    private $_NomPerso;
+    private $_Arme;
+    private $_Armure;
 
 
     public function __construct($IdDuPseudo, $Bdd)
@@ -26,6 +30,15 @@ class Hero
             $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob =" . $IdDuPseudo . "");
             $TabDataMob = $DataMob->fetch();
             $this->_VieMob = $TabDataMob['pdv'];
+            $DataPerso = $this->_Bdd->query("SELECT * from user where id_user =" . $IdDuPseudo . "");
+            $TabDataUser = $DataPerso->fetch();
+            $this->_NomHero = $TabDataUser['pseudo'];
+            $DataPerso = $this->_Bdd->query("SELECT * from arme where id_arme = " . $IdDuPseudo . "");
+            $TabdDataPerso = $DataPerso->fetch();
+            $this->_Arme = $TabdDataPerso['nom'];
+            $DataPerso = $this->_Bdd->query("SELECT * from armure where id_armure = " . $IdDuPseudo . "");
+            $TabdDataPerso = $DataPerso->fetch();
+            $this->_Armure = $TabdDataPerso['bonus_armure'];
 
         } else {
             //verifier que id est coorrect sinon simulé un perso
@@ -83,16 +96,29 @@ class Hero
 
     // Dev By Fresi
     // Fonction pour changer de Pseudo
-    function SetPseudo($NouveauSpoeudo)
+    function SetPseudo($NouveauPseudo)
     {
-        return $this->_Pseudo = $NouveauSpoeudo;
+        return $this->_NomPerso = $NouveauPseudo;
     }
 
     // Dev By Fresi
     // Fonction qui affiche les statistiques d'un personnage
     public function AfficherStats()
     {
+        echo "Votre pseudo est " . $this->_NomHero . " Vous avez " . $this->_Vie . " point de vie et " . $this->_AttaqueHero . " d'attaque";
+    }
 
-        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_attaque . " d'attaque";
+    // Dev By Fresi
+    // Fonction qui affiche l'arme d'un personnage
+    public function AfficherArme()
+    {
+        return $this->_Arme;
+    }
+
+    // Dev By Fresi
+    // Fonction qui affiche l'armure d'un personnage
+    public function AfficherArmure()
+    {
+        return $this->_Armure;
     }
 }
