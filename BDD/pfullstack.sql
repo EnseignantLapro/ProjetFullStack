@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 26 mars 2020 à 10:57
+-- Généré le :  jeu. 26 mars 2020 à 11:01
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `arme` (
 DROP TABLE IF EXISTS `armure`;
 CREATE TABLE IF NOT EXISTS `armure` (
   `id_armure` int(11) NOT NULL,
-  `nom` int(25) NOT NULL,
+  `nom` varchar(25) NOT NULL,
   `prix` float NOT NULL,
   `bonus_durabilite` int(11) NOT NULL,
   `bonus_defence` int(11) NOT NULL,
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `entite`;
 CREATE TABLE IF NOT EXISTS `entite` (
   `id_entite` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(25) NOT NULL,
-  `pdv` double NOT NULL,
+  `pdv` float NOT NULL,
   `attaque` float NOT NULL,
   `defense` float NOT NULL,
   PRIMARY KEY (`id_entite`)
