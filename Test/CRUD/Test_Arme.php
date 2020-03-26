@@ -15,7 +15,7 @@ try {
     $TabArmeIndex = 0; //équivalent de [i] en C
     while ($tab = $DonneeBruteArme->fetch()) {
 
-        $TabArme[$TabArmeIndex++] = new Arme($tab['id_arme'], $tab['nom_arme']);
+        $TabArme[$TabArmeIndex++] = new Arme($tab['id_arme'], $tab['nom_arme'],$tab['prix'],$tab['bonus_durabilite'],$tab['bonus_degat']);
     }
 } catch (Exception $e) {
     echo '<div class="error">Exception reçue : ',  $e->getMessage(), "</div>";
@@ -180,9 +180,36 @@ $connect = true;
                                     <div class="panel-body">
                                          <!-- Formulaire dans le but de crafter une arme (pas fini)-->
                                         <FORM role="form" action="" method="POST">
-                                            <input type="text" name="nomArme" placeholder="Nom de l'arme a crafter" />
-                                            <input type="submit" value="Crafter"></input>
+                                            <input type="text" name="nom_arme" placeholder="Nom de l'arme a crafter" />
+                                            <input type="text" name="prix" placeholder="Prix de l'arme" />
+                                            <input type="text" name="durabilite" placeholder="Durabilité de l'arme" />
+                                            <input type="text" name="degat" placeholder="Dégat de l'arme" />
+
+                                            <input type="submit" name="craft" value="Crafter"></input>
                                         </FORM>
+
+                                        <?php
+                                     
+                                            if(isset($_POST['craft'])){
+                                                
+
+                                                if(!empty($_POST['nom_arme']) AND !empty($_POST['prix']) AND !empty($_POST['durabilite']) AND !empty($_POST['degat'])){
+                                                    $Nom = $_POST['nom_arme'];
+                                                    $Prix = $_POST['prix'];
+                                                    $Durabilite = $_POST['durabilite'];
+                                                    $Degat = $_POST['degat'];
+                                            
+                                               
+                                                foreach ($TabArme as $objetArme) {
+                                                    
+                                                        $objetArme->craftArme($Nom,$Prix,$Durabilite,$Degat);//Appel de la méthode Craft arme
+                                                         
+                                                }
+                                                
+                                            }
+                                        }
+
+                                        ?>
                                     </div>
                                 </div>
                             </div>
