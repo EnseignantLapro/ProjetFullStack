@@ -44,12 +44,12 @@ class Hero
             //verifier que id est coorrect sinon simulé un perso
             $this->_Id = 0;
             $this->_VieMob = 1000;
-            $this->_Attaque = 50;
+            $this->_AttaqueHero = 50;
         }
     }
 
     // Dev by Wantelez Florian //
-    // Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
+    //  Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
     public function AttaqueMob($IdMob)
     {
         //on selectionne la vie du monstre
@@ -57,7 +57,7 @@ class Hero
         $TabdDataMonstre = $DataMonstre->fetch();
 
         // on lui soustrais l'attaque du héro
-        $NewVieMonstre = $TabdDataMonstre['pdv'] - $this->_Attaque;
+        $NewVieMonstre = $TabdDataMonstre['pdv'] - $this->_AttaqueHero;
 
         // Si ça est inférieure à 0 ou null alors il est mort on passe son état 0
         if ($NewVieMonstre <= 0) {
@@ -72,6 +72,25 @@ class Hero
             $TabDataMob = $DataMob->fetch();
             $this->_VieMob = $TabDataMob['pdv'];
         }
+    }
+    // Dev by Wantelez Florian //
+    public function AttaqueHero($IdHero)
+    {
+// On retire la vie du Hero par les degats d'attaques du Mob
+        $NewVieHero = $this->_VieHero - $this->_AttaqueMob;
+        if ($NewVieHero <= 0) {
+
+            $this->_Bdd->query("UPDATE eta set etat = 0 WHERE id_assoshero =" . $IdHero . "");
+            $this->_Bdd->query("UPDATE eta set pdv = 0 WHERE id_assoshero =" . $IdHero . "");
+            $this->_VieHero = 0;
+        } else {
+            // Sinon on acualise ses point de vie à ses points de vie moins les dégats de l'attaquant
+            $this->_Bdd->query("UPDATE assoshero set pdv =" . $NewVieHero . " WHERE id_assoshero =" . $IdHero . "");
+            $DataMob = $this->_Bdd->query("SELECT * from mob where id_mob = " . $IdHero . "");
+            $TabDataMob = $DataMob->fetch();
+            $this->_VieHero = $TabDataMob['pdv'];
+        }
+
     }
     // Fonction qui permet de remettre les points de vie à 100
     public function ResetHp($IdMob)
@@ -91,7 +110,6 @@ class Hero
     function GetVieMob()
     {
         return $this->_VieMob;
-
     }
 
     // Dev By Fresi
