@@ -36,7 +36,7 @@
 
         $persotemp1= new Hero(4,$bdd);
 
-        $id = GetID(); 
+        $id = $persotemp1->GetID(); 
 
         $tabid = array('idperso' => $id);
 
@@ -73,7 +73,7 @@
 
         $persotemp1= new Hero(5,$bdd);
 
-        $nvpseudo = SetPseudo($_POST['nouveaupseudo']);
+        $nvpseudo = $persotemp1->SetPseudo($_POST['nouveaupseudo']);
 
         $tabpseudo = array('pseudo' => $nvpseudo);
 

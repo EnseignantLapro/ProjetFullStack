@@ -1,18 +1,10 @@
 <?php 
-//session
-include "./BDD/Hero.php";
-//vous devez creer config.php avec les info suivantes :
-/*
- $adresse="127.0.0.1"; 
-$nomBase = "projetfullstack";
-$userBase ="root";
-$mdpBase="";
- */
+//TODO gerer session
 
+include "config.php";
 
-include "./config.php";
-echo "header";
-/*
+echo "<div> header </div>";
+
 $Bdd = null;
 try{
 
@@ -23,7 +15,7 @@ try{
         $connect = false;
 
     }
-*/
+
 //on simule une connexion tjs valide
 $connect = true;
 

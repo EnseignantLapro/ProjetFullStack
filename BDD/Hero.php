@@ -1,91 +1,22 @@
 <?php
+include "Entite.php";
 
-
-// Dev By Fresi et Wantelez
-class Hero
+class Hero extends entite
 {
+    private $_potion;
 
-    private $_Id;
-    private $_Vie;
-    private $_Attaque;
-    private $_Bdd;
-
-
-    public function __construct($IdDuPseudo, $Bdd)
+ public function showDefense()
     {
-        $this->_Bdd = $Bdd;
-        //Langlace ce rajoute un control si la bdd existe pas je la simule
-        if(!is_null($Bdd)){
-            $DataPersonnage = $this->_Bdd->query("SELECT * from personnage where id =" . $IdDuPseudo . "");
-            $TabDataPersonnage = $DataPersonnage->fetch();
-            $this->_Id = $IdDuPseudo;
-            $this->_Vie = $TabDataPersonnage['vie'];
-            $this->_Attaque = $TabDataPersonnage['attaque'];
-        }else{
-            $this->_Id = 0;
-            $this->_Vie = 10;
-            $this->_Attaque = 10;
-        }
-        
-
-        //go to base chercher les info du personnages par id
-
-
-        //verifier que id est coorrect sinon simulé un perso
-
-        $this->_Pseudo = "Perso Simulé N°" . $IdDuPseudo;
-        $this->_Vie = 50;  // La vie sera prédéfini à celle du niveau 1.
-        $this->_Attaque = 5;  // L'attaque sera défini à celle du niveau 1.
+        $Defense = entite::GetDefense(2);
+        echo "j'ai ".$Defense." de défense";
     }
 
-    // Dev by Wantelez Florian //
-    // Fonction qui permet de soustraire les points de vie de la cible en fonction des point d'attaques du personnage
-    public function AttaqueMob($IdMob)
-    {
-        // on selectionne la vie du monstre
-        //$DataMonstre = $this->_Bdd->query("SELECT * from /*TableMob*/ where id =" . $IdMob . "");
-        //$TabdDataMonstre = $DataMonstre->fetch();
 
-        // on lui soustrais l'attaque du héro
-        //Langlace ne compile pas je met en commentaire
-        //$NewVieMonstre = $TabdDataMonstre[/*vie*/] - $this->_Attaque;
-        //et je simule
-        $NewVieMonstre = 10;
-            // Si ça est inférieure à 0 ou null alors il est mort
-        if ($NewVieMonstre <= 0) {
-
-            //$this->_Bdd->query("UPDATE /*TableMob*/ set etat = 'mort' WHERE idmob =" . $IdMob . "");
-        } else {
-            //$this->_Bdd->query("UPDATE /*TableMob*/ set vie =" . $NewVieMonstre . " WHERE idmob =" . $IdMob . "");
-        }
-    }
-
-    // Dev By Fresi
-    //Accesseur
-    function GetID()
-    {
-        return $this->_Id;
-    }
-
-    // Dev By Fresi
-    // Fonction qui renvoie la valeur de la vie
-    function GetVie()
-    {
-        return $this->_Vie;
-    }
-
-    // Dev By Fresi
-    // Fonction pour changer de Pseudo
-    function SetPseudo($NouveauSpoeudo)
-    {
-        return $this->_Pseudo = $NouveauSpoeudo;
-    }
-
-    // Dev By Fresi
-    // Fonction qui affiche les statistiques d'un personnage
-    public function AfficherStats()
-    {
-
-        echo "Votre pseudo est " . $this->_pseudo . " Vous avez " . $this->_vie . " point de vie et " . $this->_attaque . " d'attaque";
-    }
 }
+include "../header.php";
+$test = new Hero(0, $Bdd);
+$test->showDefense();
+
+
+$Attaque1 = new entite(2, $Bdd);
+$Attaque1->Attaquer(3, $Attaque1->GetDefense(3));
