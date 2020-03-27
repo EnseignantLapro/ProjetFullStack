@@ -1,71 +1,63 @@
 <?php
+//DEV BY GARNON
 class Arme
 {
-        private $_id;
-        private $_Nom;
-        private $_Prix;
-        private $_Durabilite;
-        private $_Degat;
+        private $_idArme;
+        private $_bdd;
+        private $_reqArme;
+        private $_armeinfo;
 
-        public function __construct($id, $Nom, $Prix, $Durabilite, $Degat)
+        //Recupère les données de l'arme en fonction de son id
+        public function __construct($bdd, $idarme, $creation)
         {
-                $this->_id = $id;
-                $this->_Nom = $Nom;
-                $this->_Prix = $Prix;
-                $this->_Durabilite = $Durabilite;
-                $this->_Degat = $Degat;
+                $this->_bdd = $bdd;
+                $this->_idArme = $idarme;
+                if ($creation != 1) {
+                        $this->_reqArme = $this->_bdd->query('SELECT * FROM arme WHERE id_arme = ' . $this->_idArme . '');
+                        $this->_armeinfo = $this->_reqArme->fetch();
+                }
         }
-        //id Arme
-        public function getId()
-        {
-                return $this->_id;
-        }
-        //Nom Arme 
+        //Retourne nom de l'arme
         public function getNom()
         {
-                return $this->_Nom;
+                return $this->_armeinfo['nom'];
         }
-        //Prix arme
+        //Retourne prix de l'arme 
         public function getPrix()
         {
-                return $this->_Prix;
+                return $this->_armeinfo['prix'];
         }
-        //Bonus durabilité
-        public function getDurabilite()
-        {
-                return $this->_Durabilite;
-        }
-        //Bonus dégat arme
+        //Retourne dégat de l'arme
         public function getDegat()
         {
-                return $this->_Degat;
+                return $this->_armeinfo['bonus_degat'];
         }
-        //Affiche nom / id / Prix / durabilité / dégat de l'arme
-        public function AfficheArme()
+        //Retourne durabilité de l'arme
+        public function getDurabilite()
         {
-                echo 'ID Arme:' . $this->_id . ' | Arme:' . $this->_Nom.' | prix:'.$this->_Prix.'$ | Durabilité:'.$this->_Durabilite.' | Dégat :'.$this->_Degat ;
+                return $this->_armeinfo['bonus_durabilite'];
+        }
+        //Créé l'arme
+        public function createArme($nom,$prix,$durabilite,$degats)
+        {
+                $create = $this->_bdd->query("INSERT INTO `arme` (`id_arme`, `nom`, `prix`, `bonus_durabilite`, `bonus_degat`) VALUES (NULL, '".$nom."', '".$prix."', '".$durabilite."', '".$degats."')");
         }
         //Supprime l'arme dans la BDD
         public function deleteArme()
         {
-                echo "ID Arme suppression: " . $this->_id . " Arme supprimer: " . $this->_Nom;
-                global $Bdd;
-                $delet = $Bdd->prepare("DELETE FROM `arme` WHERE `id_arme` = " . $this->_id);
-                $delet->execute(array($this->_id));
+                $delete = $this->_bdd->prepare("DELETE FROM `arme` WHERE `id_arme` = ?");
+                $delete->execute(array($this->_idArme));
         }
-
-        //Craft arme
-        public function craftArme($Nom,$Prix,$Durabilite,$Degat)
+        //Change l'attaque du heros dans la table assoshero et change l'id de l'arme du heros
+        public function equiperArme($id_user, $id_hero)
         {
-                global $Bdd;
-                $ajout = $Bdd->prepare("INSERT INTO `arme` (`nom_arme`, `prix`, `bonus_durabilite`, `bonus_degat`)
-                 VALUES (:nom_arme,:prix,:bonus_durabilite,:bonus_degat)");
-                $ajout->execute(['nom_arme' => $Nom,
-                'prix' => $Prix,
-                'bonus_durabilite' => $Durabilite,
-                'bonus_degat' => $Degat
-                ]);
-
-   
+                $reqAssos = $this->_bdd->query('SELECT * FROM assoshero WHERE id_user = ' . $id_user . ' AND id_hero = ' . $id_hero . '');
+                $assosinfo = $reqAssos->fetch();
+                $reqHero = $this->_bdd->query('SELECT * FROM typehero WHERE id_hero = ' . $assosinfo['id_hero'] . '');
+                $heroinfo = $reqHero->fetch();
+                $upID = $this->_bdd->query('UPDATE assoshero SET id_arme = ' . $this->_idArme . ' WHERE id_user = ' . $id_user . ' AND id_hero = ' . $id_hero . '');
+                $attaquefinale = $heroinfo['attaque'] + $this->_armeinfo['bonus_degat'];
+                echo "<br>L'attaque de " . $heroinfo['nom'] . " est passée de " . $assosinfo['attaque'] . " à " . $attaquefinale;
+                $upArme = $this->_bdd->query('UPDATE assoshero SET attaque = ' . $attaquefinale . ' WHERE id_user = ' . $id_user . '');
         }
 }
