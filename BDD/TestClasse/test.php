@@ -1,5 +1,6 @@
 <?php 
-// Dev by FRESI
+// Dev by FRESI 
+//TODO les test unitaire de classe n'on pas besoin de formulaire
 include("Hero.php");
 include("../header.php");  
     $Perso1 = new Hero(1, $Bdd); 

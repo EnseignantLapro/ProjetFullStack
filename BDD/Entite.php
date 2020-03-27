@@ -2,7 +2,9 @@
 class entite
 {
     private $_IdEntite;
-    private $_IdArme;
+    //TODO travailler avec des Objet Arme plutot que id-Arme
+    //arme doit contenir un objet idem pour armure ect
+    private $_Arme;
     private $_IdArmure;
     private $_Nom;
     private $_Pdv;
@@ -17,6 +19,7 @@ class entite
         $this->_Bdd = $Bdd;
 
         $DataEntite = $this->_Bdd->query("SELECT * from entite where id_entite =" . $IdEntite . "");
+        //TODO Traiter le cas ou DataEntite est pas un objet de requete
         $TabDataEntite = $DataEntite->fetch();
         // On récupère toutes les infos de l'entité
         $this->_IdArme = $TabDataEntite["id_arme"];
@@ -29,15 +32,12 @@ class entite
         $this->_Niveau = $TabDataEntite["niveau"];
         $this->_eta = $TabDataEntite["eta"];
     }
-// fonction qui permet de soustraire les pv de la cible en fonction de pv de l'attaquant
-    
-    public function GetDefense($IdDefender){
 
-        $DataDefender = $this->_Bdd->query("SELECT defense from entite WHERE id_entite =".$IdDefender."");
-        $TabDataDefender = $DataDefender->fetch();
-        return $TabDataDefender['defense'];
-    }
+    //TODO les méthodes metiers son a faire hors de la classe
+    // fonction qui permet de soustraire les pv de la cible en fonction de pv de l'attaquant    
+   
 
+    //déplacer cette méthode dans la couche metier , ne pas faire de requête utilisé les membres des objets
     public function Attaquer($IdCible, $Defense){
 
         $DataCible = $this->_Bdd->query("SELECT pdv from entite WHERE id_entite =".$IdCible."");
@@ -63,5 +63,26 @@ class entite
         }
         
 
+    }
+
+
+    //GET SET
+    public function getNom(){
+        return $this->_Nom;
+    }
+    public function getDefense(){
+        return $this->_Defense;
+    }
+
+    //Permet d'associer une arme à une entité
+    public function setArme($NouvelleARme){ 
+        $this->_Arme = $NouvelleARme;
+    }
+
+    public function setNom($leNouveauNom){
+
+        //TODO Controler que $LeNouveauNom est bien un nom sinon retourn false
+        $this->_nom = $leNouveauNom;
+        return true;
     }
 }
