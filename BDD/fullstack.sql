@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 27 mars 2020 à 13:26
+-- Généré le :  ven. 27 mars 2020 à 14:50
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projetfullstack`
+-- Base de données :  `pfullstack`
 --
 
 -- --------------------------------------------------------
@@ -36,7 +36,14 @@ CREATE TABLE IF NOT EXISTS `arme` (
   `durabilite` int(11) NOT NULL,
   `bonus_degat` int(11) NOT NULL,
   PRIMARY KEY (`id_arme`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `arme`
+--
+
+INSERT INTO `arme` (`id_arme`, `nom`, `prix`, `durabilite`, `bonus_degat`) VALUES
+(1, 'Poing', 0, 9999999, 0);
 
 -- --------------------------------------------------------
 
@@ -52,7 +59,14 @@ CREATE TABLE IF NOT EXISTS `armure` (
   `durabilite` int(11) NOT NULL,
   `bonus_defense` int(11) NOT NULL,
   PRIMARY KEY (`id_armure`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `armure`
+--
+
+INSERT INTO `armure` (`id_armure`, `nom`, `prix`, `durabilite`, `bonus_defense`) VALUES
+(1, 'Plastron', 0, 9999999, 15);
 
 -- --------------------------------------------------------
 
@@ -68,7 +82,14 @@ CREATE TABLE IF NOT EXISTS `assochero` (
   PRIMARY KEY (`id_assoc`),
   KEY `id_user` (`id_user`,`id_hero`),
   KEY `id_hero` (`id_hero`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `assochero`
+--
+
+INSERT INTO `assochero` (`id_assoc`, `id_user`, `id_hero`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -79,19 +100,27 @@ CREATE TABLE IF NOT EXISTS `assochero` (
 DROP TABLE IF EXISTS `entite`;
 CREATE TABLE IF NOT EXISTS `entite` (
   `id_entite` int(11) NOT NULL AUTO_INCREMENT,
+  `id_map` int(11) NOT NULL,
+  `id_armure` int(11) NOT NULL,
+  `id_arme` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL,
   `pdv` float NOT NULL,
   `attaque` float NOT NULL,
   `defense` float NOT NULL,
-  `id_armure` int(11) NOT NULL,
   `niveau` int(11) NOT NULL,
   `etat` tinyint(1) NOT NULL,
-  `id_arme` int(11) NOT NULL,
-  `id_map` int(11) NOT NULL,
   PRIMARY KEY (`id_entite`),
   KEY `id_armure` (`id_armure`,`id_arme`),
   KEY `id_map` (`id_map`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `entite`
+--
+
+INSERT INTO `entite` (`id_entite`, `id_map`, `id_armure`, `id_arme`, `nom`, `pdv`, `attaque`, `defense`, `niveau`, `etat`) VALUES
+(1, 1, 1, 1, 'Ashe', 650, 50, 20, 0, 1),
+(2, 1, 1, 1, 'Dragon', 1000, 80, 100, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -102,21 +131,27 @@ CREATE TABLE IF NOT EXISTS `entite` (
 DROP TABLE IF EXISTS `hero`;
 CREATE TABLE IF NOT EXISTS `hero` (
   `id_hero` int(11) NOT NULL AUTO_INCREMENT,
+  `id_entite` int(11) NOT NULL,
   `id_typehero` int(11) NOT NULL,
   `id_arme` int(11) NOT NULL,
-  `id_entite` int(11) NOT NULL,
   `id_armure` int(11) NOT NULL,
   `potion` int(11) NOT NULL,
   `pdv` int(11) NOT NULL,
   `attaque` int(11) NOT NULL,
   `defense` int(11) NOT NULL,
-  `niveau` int(11) NOT NULL,
   PRIMARY KEY (`id_hero`),
   KEY `id_typehero` (`id_typehero`,`id_entite`),
   KEY `id_entite` (`id_entite`),
   KEY `id_arme` (`id_arme`),
   KEY `id_armure` (`id_armure`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `hero`
+--
+
+INSERT INTO `hero` (`id_hero`, `id_entite`, `id_typehero`, `id_arme`, `id_armure`, `potion`, `pdv`, `attaque`, `defense`) VALUES
+(1, 1, 1, 1, 1, 0, 650, 50, 20);
 
 -- --------------------------------------------------------
 
@@ -129,7 +164,14 @@ CREATE TABLE IF NOT EXISTS `map` (
   `id_map` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(25) NOT NULL,
   PRIMARY KEY (`id_map`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `map`
+--
+
+INSERT INTO `map` (`id_map`, `nom`) VALUES
+(1, 'Forêt Torturé');
 
 -- --------------------------------------------------------
 
@@ -140,11 +182,17 @@ CREATE TABLE IF NOT EXISTS `map` (
 DROP TABLE IF EXISTS `mob`;
 CREATE TABLE IF NOT EXISTS `mob` (
   `id_mod` int(11) NOT NULL AUTO_INCREMENT,
-  `etat` tinyint(1) NOT NULL,
   `id_entite` int(11) NOT NULL,
   PRIMARY KEY (`id_mod`),
   KEY `id_entite` (`id_entite`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `mob`
+--
+
+INSERT INTO `mob` (`id_mod`, `id_entite`) VALUES
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -157,7 +205,14 @@ CREATE TABLE IF NOT EXISTS `typehero` (
   `id_typehero` int(11) NOT NULL AUTO_INCREMENT,
   `categorie` varchar(25) NOT NULL,
   PRIMARY KEY (`id_typehero`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `typehero`
+--
+
+INSERT INTO `typehero` (`id_typehero`, `categorie`) VALUES
+(1, 'Archer');
 
 -- --------------------------------------------------------
 
@@ -173,7 +228,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mdp` varchar(100) NOT NULL,
   `dollars` float NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id_user`, `pseudo`, `mail`, `mdp`, `dollars`) VALUES
+(1, 'Rainolf', 'floflobg1999@hotmail.fr', 'mdpsecure123', 0);
 
 --
 -- Contraintes pour les tables déchargées
