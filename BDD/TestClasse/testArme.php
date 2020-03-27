@@ -64,4 +64,22 @@ if (isset($_POST['submitCrea'])  && !empty($_POST['nomCrea']) && !empty($_POST['
     echo "<br>Arme créée";
     $armeCree->createArme($_POST['nomCrea'], $_POST['prixCrea'], $_POST['durabiliteCrea'], $_POST['degatsCrea']);
 }
+
+
+try {
+    //pour 1 test 
+    //tonobjet  -> tamethode(ton paramètre)
+    //si c'est bon tu met echo ok
+} catch (\Throwable $th) {
+    //throw $th;
+    //si erreur tu met ko
+}
+try {
+    //pour 2 test 
+    //tonobjet  -> tamethode2(ton autre paramètre)
+    //si c'est bon tu met echo ok
+} catch (\Throwable $th) {
+    //throw $th;
+    //si erreur tu met ko
+}
 ?>

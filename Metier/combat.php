@@ -2,19 +2,21 @@
 //DEV BY WANTELEZ
 include "../BDD/Personnage.php";
 /* En cours de construction
-class attaque {
+Le metier n'est normalement pas une classe
+c'est un couche 
 
-private    
+ici vous utiliser les objext en appelant leur méthode pour faire vos manipulation et calcul
 
-function attaque() {
+TODO 
 
-    
-}
 
-function combat($Perso1,$Perso2){
-    
-    echo "je suis ".$Perso1;
-    echo "combat de ".$Perso1->afficherInfo()." et de ".$Perso2->afficherInfo();
+$Hero1 = new hero(12212,$bdd);
+$mob1 = new mob(276233;$bdd);
+
+TU peux faire des foncitons
+
+funtoin attaquet($hero1,$mob1){
+     $mob1->getVie - $hero1->getDegat 
 }
 
 */

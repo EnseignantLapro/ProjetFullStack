@@ -1,5 +1,5 @@
 <?php 
-//session
+//TODO gerer session
 
 include "config.php";
 
