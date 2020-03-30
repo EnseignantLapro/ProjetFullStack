@@ -27,7 +27,7 @@ class entite
             $this->_Attaque = $TabDataEntite["attaque"];
             $this->_Defense = $TabDataEntite["defense"];
             $this->_Niveau = $TabDataEntite["niveau"];
-            $this->_eta = $TabDataEntite["eta"];
+            $this->_eta = $TabDataEntite["etat"];
         } else {
             echo "Erreure la requete : \"SELECT * from entite where id_entite = . $IdEntite . \" ne retourne aucune valeur'";
         }
