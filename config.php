@@ -1,5 +1,5 @@
 <?php $adresse="localhost"; 
-$nomBase = "pfullstack";
+$nomBase = "fullstack";
 $userBase ="root";
 $mdpBase="";
 
