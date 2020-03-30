@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 27 mars 2020 à 16:22
+-- Généré le :  lun. 30 mars 2020 à 15:50
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -111,7 +111,8 @@ CREATE TABLE IF NOT EXISTS `entite` (
   `etat` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_entite`),
   KEY `id_armure` (`id_armure`,`id_arme`),
-  KEY `id_map` (`id_map`)
+  KEY `id_map` (`id_map`),
+  KEY `id_arme` (`id_arme`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
@@ -207,6 +208,7 @@ CREATE TABLE IF NOT EXISTS `typehero` (
   `pdv` int(11) NOT NULL,
   `attaque` int(11) NOT NULL,
   `defense` int(11) NOT NULL,
+  `niveau` int(11) NOT NULL,
   PRIMARY KEY (`id_typehero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
@@ -214,8 +216,8 @@ CREATE TABLE IF NOT EXISTS `typehero` (
 -- Déchargement des données de la table `typehero`
 --
 
-INSERT INTO `typehero` (`id_typehero`, `id_arme`, `id_armure`, `nom`, `categorie`, `pdv`, `attaque`, `defense`) VALUES
-(1, 0, 0, 0, 'Archer', 0, 0, 0);
+INSERT INTO `typehero` (`id_typehero`, `id_arme`, `id_armure`, `nom`, `categorie`, `pdv`, `attaque`, `defense`, `niveau`) VALUES
+(1, 0, 0, 0, 'Archer', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -255,7 +257,9 @@ ALTER TABLE `assochero`
 -- Contraintes pour la table `entite`
 --
 ALTER TABLE `entite`
-  ADD CONSTRAINT `entite_ibfk_1` FOREIGN KEY (`id_map`) REFERENCES `map` (`id_map`);
+  ADD CONSTRAINT `entite_ibfk_1` FOREIGN KEY (`id_map`) REFERENCES `map` (`id_map`),
+  ADD CONSTRAINT `entite_ibfk_2` FOREIGN KEY (`id_armure`) REFERENCES `armure` (`id_armure`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `entite_ibfk_3` FOREIGN KEY (`id_arme`) REFERENCES `arme` (`id_arme`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `hero`
