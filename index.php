@@ -21,46 +21,58 @@ include "config.php";
 
     <body>
 
-    <div class="container" align="center">
-    <div class="col-lg-7 formulaire">
+<div class="container" align="center">
+<div class="row">
 
-    <form method="post" action="">
-    <p><h1>Projet Fullstack</h1></p>
-    <fieldset>
-        <div class="col-lg-12 mail"><p><input class="text" type="text" name="email" placeholder="Adresse Mail" autofocus required></p></div>
-        <div class="col-lg-12 password"><p><input class="text" type="text" name="password" placeholder="Mot de passe" required></p></div>
-    </fieldset>
-    <fieldset>
-    <div class="row">
-    <div class="col-md-3">
+    <div class="col-lg-12 fullstack">
+        <h1>Projet Fullstack</h1>
     </div>
-        <div class="col-md-1">
-            <form method="post" action="">
-            <input class="button" type="submit" value="Se connecter">
-            </form>
-        </div>
-        <div class="col-md-1 offset-md-2">
-            <form method="post" action="">
-            <input class="button" type="submit" value="S'inscrire">
-            </form>
+
+    <div class="col-lg-5 connexion" align="center">
+        <div class="col-xs-12" align="center">
+            
+                <h1 id="modif2">Vous connectez</h1>
+                    <form action="index.php" method="POST"> 
+                    <p><label><h3>Adresse Mail</h3></label>
+                    <input type="text" name="NDC_2" class="text"/></p>
+                    <p><label><h3>Mot De Passe</h3></label>
+                    <input type="password" name="MDP_2" class="text"/></p>
+                    <p> </p>
+                    <input type="submit" name="valider2" value="connexion" class="button"/>
+                    </form>
+           
         </div>
     </div>
-    </fieldset>
-   
-    </div> 
-    
-    <?php
-    if ($connect == true) {
-        echo "<p><h1>je suis connecter</h1></p>";
-    } else if ($connect == false) {
-    }
-    ?>
+
+    <div class="col-lg-2">
     </div>
-   
+
+    <div class="col-lg-5 inscription" align="center">
+        <div class="col-xs-12" align="center">
+            
+                <h1 id="modif1">Creer votre compte</h1> 
+                    <form action="index.php" method="POST"> 
+                    <p><label><h3>Pseudo</h3></label>
+                    <input type="text" name="NDC_1" class="text"/></p>
+                    <p><label><h3>Adresse Mail</h3></label>
+                    <input type="text" name="NDC_1" class="text"/></p>
+                    <p><label><h3>Mot De Passe</h3></label>
+                    <input type="password" name="MDP_1" class="text"/></p>
+                    <p> </p>
+                    <input type="submit" name="valider1" value="s'inscrire" class="button"/>
+                    </form>
+            
+        </div>
+    </div>
+
+    <div class="col-lg-12 presentation">
+        salut ca va
+    </div>
+
+</div>
+</div>
+
     </body>
-
-
-
 </html>
 
 <?php
