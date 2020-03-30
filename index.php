@@ -1,6 +1,6 @@
 <?php
 
-include "header.php";
+include "./IHM/header.php";
 include "config.php";
 
 /*if(isset($_GET['map'])){
@@ -13,24 +13,58 @@ include "config.php";
     }
 */
 ?>
-<form method="post" action="">
-    <h3>Log In</h3>
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="IHM/bootstrap-4.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="IHM/index.css">
+    </head>
+
+    <body>
+
+    <div class="container" align="center">
+    <div class="col-lg-7 formulaire">
+
+    <form method="post" action="">
+    <p><h1>Projet Fullstack</h1></p>
     <fieldset>
-        <input type="text" name="email" placeholder="Adresse Mail" autofocus required>
-        <input type="text" name="password" placeholder="Mot de passe" required>
+        <div class="col-lg-12 mail"><p><input class="text" type="text" name="email" placeholder="Adresse Mail" autofocus required></p></div>
+        <div class="col-lg-12 password"><p><input class="text" type="text" name="password" placeholder="Mot de passe" required></p></div>
     </fieldset>
     <fieldset>
-        <form method="post" action="">
+    <div class="row">
+    <div class="col-md-3">
+    </div>
+        <div class="col-md-1">
+            <form method="post" action="">
             <input class="button" type="submit" value="Se connecter">
-        </form>
-        <form method="post" action="">
+            </form>
+        </div>
+        <div class="col-md-1 offset-md-2">
+            <form method="post" action="">
             <input class="button" type="submit" value="S'inscrire">
-        </form>
+            </form>
+        </div>
+    </div>
     </fieldset>
+   
+    </div> 
+    
     <?php
     if ($connect == true) {
-        echo "je suis connect";
+        echo "<p><h1>je suis connecter</h1></p>";
     } else if ($connect == false) {
     }
+    ?>
+    </div>
+   
+    </body>
 
-    include "footer.php";
+
+
+</html>
+
+<?php
+//$Perso1 = new Hero(0, $Bdd);
+
+
+    include "./IHM/footer.php";
