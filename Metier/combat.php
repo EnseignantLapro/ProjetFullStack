@@ -1,46 +1,28 @@
 <?php
 //DEV BY WANTELEZ
-include "../BDD/Personnage.php";
+
+include "../header.php";
+include "../BDD/Entite.php";
 /* En cours de construction*/
- 
-//déplacer cette méthode dans la couche metier , ne pas faire de requête utilisé les membres des objets
-    function Attaquer($IdCible, $Defense)
-    {
 
-        $DataCible = $this->_Bdd->query("SELECT pdv from entite WHERE id_entite =" . $IdCible . "");
-        $TabDataCible = $DataCible->fetch();
+function Attaquer($IdAgresseur, $IdVictime, $Bdd)
+{
 
-        $Reduction = $this->_Attaque * ($Defense / 200);
-        $Attaque = $this->_Attaque - $Reduction;
-        $NewVieCible = $TabDataCible["pdv"] - $Attaque;
+    $Agresseur = new entite($IdAgresseur, $Bdd);
+    $Victime = new entite($IdVictime, $Bdd);
 
-        if ($NewVieCible <= 0) {
-
-            $this->_Bdd->query("UPDATE entite set etat = 0 WHERE id_entite =" . $IdCible . "");
-            $this->_Bdd->query("UPDATE entite set pdv = 0 WHERE id_mob =" . $IdCible . "");
-        } else {
-            // Sinon on acualise ses point de vie à ses points de vie moins les dégats de l'attaquant
-            $this->_Bdd->query("UPDATE entite set pdv =" . $NewVieCible . " WHERE id_entite =" . $IdCible . "");
-            $DataCible = $this->_Bdd->query("SELECT * from entite where id_entite = " . $IdCible . "");
-            $TabDatCible = $DataCible->fetch();
-            echo "<div><p> la cible a " . $TabDatCible['pdv'] . " pdv<p>
-            <div>
-            <p>F5 pour attaquer (je ferais un bouton plus tard)</p></div>";
-        }
+    $VictimePdv = $Victime->getPdv() - $Agresseur->getAttaque();
+    if ($VictimePdv > 0) {
+        $Victime->setPdv($VictimePdv);
+        $Bdd->query("UPDATE `entite` SET `pdv` = " . $VictimePdv . " WHERE `entite`.`id_entite` = " . $Victime->getId() . "");
+    } else {
+        $VictimePdv = 0;
+        $Victime->setPdv($VictimePdv);
+        $Bdd->query("UPDATE `entite` SET `pdv` = " . $VictimePdv . ", `etat` = '0' WHERE `entite`.`id_entite` = " . $Victime->getId() . "");
     }
-$Hero1 = new hero(12212,$bdd);
-$mob1 = new mob(276233;$bdd);
-/*
-TU peux faire des foncitons
-
-funtoin attaquet($hero1,$mob1){
-     $mob1->getVie - $hero1->getDegat 
+    echo "<div> <p>Pdv du dragon :" . $Victime->getPdv() . "</p></div>";
 }
 
-*/
-?>
+echo "<div><p>Appuyez sur f5 pour attaquer (je ferais un btn plus tard)<p><div>";
 
-
-
-
-
+Attaquer(1, 2, $Bdd);
