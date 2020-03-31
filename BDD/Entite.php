@@ -1,4 +1,5 @@
 <?php
+// Dev By Wantelez Florian
 class entite
 {
     private $_IdEntite;
@@ -7,7 +8,7 @@ class entite
     private $_Attaque;
     private $_Defense;
     private $_Niveau;
-    private $_eta;
+    private $_etat;
 
     public function __construct($IdEntite, $Bdd)
     {
@@ -27,9 +28,9 @@ class entite
             $this->_Attaque = $TabDataEntite["attaque"];
             $this->_Defense = $TabDataEntite["defense"];
             $this->_Niveau = $TabDataEntite["niveau"];
-            $this->_eta = $TabDataEntite["etat"];
+            $this->_etat = $TabDataEntite["etat"];
         } else {
-            echo "Erreure la requete : \"SELECT * from entite where id_entite = . $IdEntite . \" ne retourne aucune valeur'";
+            echo "L'objet est vide";
         }
     }
     //Method Get
@@ -53,9 +54,9 @@ class entite
     {
         return $this->_Niveau;
     }
-    public function getEta()
+    public function getEtat()
     {
-        return $this->_eta;
+        return $this->_etat;
     }
     public function getId()
     {
@@ -83,8 +84,8 @@ class entite
     {
         $this->_Niveau = $NewNiveau;
     }
-    public function setEta($NewEta)
+    public function setEtat($NewEtat)
     {
-        $this->_eta = $NewEta;
+        $this->_etat = $NewEtat;
     }
 }
