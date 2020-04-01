@@ -1,8 +1,9 @@
 <?php
 include "Entite.php";
-
+// Dev By Wantelez Florian
 class Hero extends entite
 {
+
     private $_IdHero;
     private $_Nom;
     private $_Pdv;
@@ -12,26 +13,29 @@ class Hero extends entite
 
 
 
-    public function __construct($Bdd, $IdHero)
+    public function __construct($IdHero, $Bdd)
     {
-        $this->_IdHero = $IdHero;
+        if (isset($IdHero)) {
 
-        $DataHero = $Bdd->query("SELECT * from entite where id_entite =" . $IdHero . "");
+            $this->_IdHero = $IdHero;
 
-        if (isset($DataHero)) {
-            //TODO Traiter le cas ou DataEntite est pas un objet de requete
-            $TabDataHero = $DataHero->fetch();
-            // On récupère toutes les infos de l'entité
-            $this->_IdArme = $TabDataHero["id_arme"];
-            $this->_IdArmure = $TabDataHero["id_armure"];
-            $this->_Nom = $TabDataHero["nom"];
-            $this->_IdArme = $TabDataHero["id_arme"];
-            $this->_Pdv = $TabDataHero["pdv"];
-            $this->_Attaque = $TabDataHero["attaque"];
-            $this->_Defense = $TabDataHero["defense"];
-            $this->_Potion = $TabDataHero["potion"];
+            $DataHeroExtendEntite = $Bdd->query("SELECT id_hero, nom, pdvmax, attaquemax, defensemax, potion from hero INNER JOIN entite on hero.id_hero = entite.id_entite where hero.id_hero =" . $IdHero . "");
+
+            if (isset($DataHeroExtendEntite)) {
+                //TODO Traiter le cas ou DataEntite est pas un objet de requete
+                $TabDataHeroExtendEntite = $DataHeroExtendEntite->fetch();
+                // On récupère toutes les infos de l'entité
+
+                $this->_Nom = $TabDataHeroExtendEntite["nom"];
+                $this->_Pdv = $TabDataHeroExtendEntite["pdvmax"];
+                $this->_Attaque = $TabDataHeroExtendEntite["attaquemax"];
+                $this->_Defense = $TabDataHeroExtendEntite["defensemax"];
+                $this->_Potion = $TabDataHeroExtendEntite["potion"];
+            } else {
+                echo "Erreure la requete : retourne un objet null'";
+            }
         } else {
-            echo "Erreure la requete : \"SELECT * from entite where id_entite = . $DataHero . \" ne retourne aucune valeur'";
+            "Error IdHero non défini";
         }
     }
     //Method Get
