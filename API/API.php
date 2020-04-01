@@ -1,28 +1,40 @@
-<?php include "../BDD/Hero.php";
-      
+<?php include "../BDD/Entite.php";
+      include "../BDD/combat.php";
+      include "../BDD/Hero.php";
 
     
     
 
     $_POST['combat'] = 1;
-    $_POST['idperso1'] = 2;
-    $_POST['idperso2'] = 3;
+    $_POST['idagresseur'] = 2;
+    $_POST['idvictime'] = 3;
+    $iddehero=2;
+    $iddevictime=3;
     $bdd=null;
    
 
-    if(isset($_POST['combat'])&&isset($_POST['idperso1'])&&isset($_POST['idperso2']))
+    if(isset($_POST['combat'])&&isset($_POST['idagresseur'])&&isset($_POST['idvictime']))
     {
-        //prochainement : requete sql qui récupèrera les infos des deux persos qui se battent 
+        //prochainement : requete sql qui permettra d'identifier l'agresseur et la victime 
 
-        $persotemp1= new Hero(3,$bdd);
-        $persotemp2= new Hero(2,$bdd);
+        if($_POST['idagresseur']== $iddehero) //si l'agresseur est un hero, j'instancie un hero
+        {
+            $persotamp1 = new Entite(1,$bdd);
+        }
 
-        $persotemp1->AttaqueMob($persotemp2); //le premier id est celui de l'agresseur 
+        if( $_POST['idvictime'] ==  $iddevictime)
+        {
+
+            $persotamp2 = new Entite(2,$bdd);
+        }
+      
+
+        $persotemp1->Attaquer(1,2,$bdd); //le premier id est celui de l'agresseur, le second celui de la victime
        
-        $vieperso1 =  $persotemp1->getvie(); //on récupère la vie des deux personnages, ce sont les informations à retourner
-        $vieperso2 =  $persotemp2->getvie();
+         
+        $vieperso2 =  $persotemp2->getPdv();//on récupère la vie de l'entité attaquée, ce sont les informations à retourner
         
-        $life = array('vie1' => $vieperso1, 'vie2' => $vieperso2);
+        $life = array('vie' => $vieperso1, 'vie2' => $vieperso2);
 
         //$jsonretour = "{_Vie:vieperso1,_Vie:vieperso2}";
         //echo $jsonretour;
