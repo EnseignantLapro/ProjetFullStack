@@ -8,10 +8,19 @@
     $_POST['combat'] = 1;
     $_POST['idagresseur'] = 2;
     $_POST['idvictime'] = 3;
+    $_POST['getnom'];
+    
     $iddehero=2;
     $iddevictime=3;
-    $bdd=null;
-   
+    
+    try
+    {
+        $bdd = new PDO('mysql:host=localhost; dbname=pfullstack; charset=utf8','root','');
+    }
+    catch(Exception $e)
+    {
+        echo "erreur connexion à la base";
+    }
 
     if(isset($_POST['combat'])&&isset($_POST['idagresseur'])&&isset($_POST['idvictime']))
     {
@@ -32,8 +41,8 @@
         $persotemp1->Attaquer(1,2,$bdd); //le premier id est celui de l'agresseur, le second celui de la victime
        
          
-        $vieperso2 =  $persotemp2->getPdv();//on récupère la vie de l'entité attaquée, ce sont les informations à retourner
-        
+        $viepersoattaquant =  $persotamp1->getPdv(); //on récupère la vie de l'entité attaquant et de l'entité attaquée, ce sont les informations à retourner
+        $viepersovictime = $persotamp2->getPdv();
         $life = array('vie' => $vieperso1, 'vie2' => $vieperso2);
 
         //$jsonretour = "{_Vie:vieperso1,_Vie:vieperso2}";
