@@ -12,7 +12,10 @@ function Attaquer($IdAgresseur, $IdVictime, $Bdd)
     $Agresseur = new entite($IdAgresseur, $Bdd);
     $Victime = new entite($IdVictime, $Bdd);
 
-    $VictimePdv = $Victime->getPdv() - $Agresseur->getAttaque();
+
+    $ReductionDegats = $Agresseur->getAttaque() * (($Victime->getDefense() * 80 / 200) / 100);
+    $DegatsAgresseur = $Agresseur->getAttaque() - $ReductionDegats;
+    $VictimePdv = $Victime->getPdv() - $DegatsAgresseur;
     // Si les points de vie sont supérieure à 0 alors on set les pdv en base
     if ($VictimePdv > 0) {
         $Victime->setPdv($VictimePdv);
@@ -23,9 +26,9 @@ function Attaquer($IdAgresseur, $IdVictime, $Bdd)
         $Victime->setPdv($VictimePdv);
         $Bdd->query("UPDATE `entite` SET `pdv` = " . $VictimePdv . ", `etat` = '0' WHERE `entite`.`id_entite` = " . $Victime->getId() . "");
     }
-    echo "<div> <p>Pdv du dragon :" . $Victime->getPdv() . "</p></div>";
+    echo "<div> pdv du dragon : ".$Victime->getPdv()." </div>";
 }
 
-echo "<div><p>Appuyez sur f5 pour attaquer (je ferais un btn plus tard)<p><div>";
-
+echo "<div><p>Appuyez sur f5 pour attaquer";
 Attaquer(1, 2, $Bdd);
+
