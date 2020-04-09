@@ -1,3 +1,5 @@
+<?php require("./BDD/user.php");?>
+
 <html>
     <head>
         
@@ -31,13 +33,13 @@
                     }else{
                     
                     $user = new user();
-                    $user->usersCo($_POST['NDC_2'] , $_POST['MDP_2']);
-                    $isconnectUS = $user->Compar2($_POST['NDC_2'],$_POST['MDP_2']);
+                    $user->usersConnexion($_POST['NDC_2'] , $_POST['MDP_2']);
+                    $isconnectUS = $user->Compar($_POST['NDC_2'],$_POST['MDP_2']);
                     if($isconnectUS){
 
                     echo"<p><h3>vous etes connectez.</h3></p>"; 
-                    
-                        $_SESSION['Connect']=true;
+
+                    $_SESSION['Connect']=true;
 
                     ?><p><input type="button" name="lien1" value="redirection" onclick="self.location.href=''" style="background-color:#3cb371" style="color:white; font-weight:bold"onclick class="bouton"></p><?php
                              
@@ -72,10 +74,10 @@
             <?php
                 if(empty($_POST['pseudo_1']) && empty($_POST['mail_1']) && empty($_POST['MDP_1'])){
       
-                }else{ //creer le compte via la function UserNv
+                }else{ 
                     
                     $user = new user();
-                    $user->UsersNv($_POST['pseudo_1'] , $_POST['mail_1'] , $_POST['MDP_1']);
+                    $user->UsersNew($_POST['pseudo_1'] , $_POST['mail_1'] , $_POST['MDP_1']);
                     echo"<p><h3>nouvelle utilisateur creer veuillez renter a nouveau vos identifiants.</h3></p>";
                 }
             ?>
