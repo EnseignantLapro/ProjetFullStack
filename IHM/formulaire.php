@@ -1,4 +1,4 @@
-<?php require("./BDD/user.php");?>
+<?php require("./BDD/connexion.php");?>
 
 <html>
     <head>
