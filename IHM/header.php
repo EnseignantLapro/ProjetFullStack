@@ -26,7 +26,6 @@ if(isset($_SESSION['Connect'])){
 
     include "formulaire.php";
 
-    $_SESSION['Connect']=true;
 }
 
 /*

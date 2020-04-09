@@ -15,13 +15,13 @@
                         <div class="col-xs-12" align="center">
                             
                                 <h1 id="modif2">Vous connectez</h1>
-                                    <form action="index.php" method="POST"> 
+                                    <form action="" method="POST"> 
                                         <p><label><h3>Adresse Mail</h3></label>
                                         <input type="text" name="NDC_2" class="text"/></p>
                                         <p><label><h3>Mot De Passe</h3></label>
                                         <input type="password" name="MDP_2" class="text"/></p>
                                         <p> </p>
-                                        <input type="button" name="lien1" value="connexion" onclick="self.location.href='IHM/menu.php'" class="button"/>
+                                        <input type="submit" name="lien1" value="connexion" class="button"/>
                                     </form>
 
             <?php
@@ -37,6 +37,8 @@
 
                     echo"<p><h3>vous etes connectez.</h3></p>"; 
                     
+                        $_SESSION['Connect']=true;
+
                     ?><p><input type="button" name="lien1" value="redirection" onclick="self.location.href=''" style="background-color:#3cb371" style="color:white; font-weight:bold"onclick class="bouton"></p><?php
                              
                     }else{ 
