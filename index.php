@@ -1,6 +1,6 @@
 <?php
 
-include "./IHM/header.php";
+include "header.php";
 include "config.php";
 
 
@@ -17,28 +17,30 @@ include "config.php";
 ?>
 
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="IHM/bootstrap-4.4.1-dist/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="IHM/index.css">
-    </head>
-        <body>
 
-        <?php
+<head>
+    <link rel="stylesheet" type="text/css" href="IHM/bootstrap-4.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="IHM/index.css">
+</head>
 
-        if($isconnect){
-            echo"vous etes sur le site";
+<body>
 
-        }else{
-            echo"vous devez vous identifiez";
-        }
-        
-        ?>
+    <?php
 
-        </body>
+    if (isset($connect)) {
+        echo "<div>vous etes sur le site</div>";
+    } else {
+        echo "<div>vous devez vous identifiez</div>";
+    }
+
+    ?>
+
+</body>
+
 </html>
 
 <?php
 //$Perso1 = new Hero(0, $Bdd);
 
 
-    include "./IHM/footer.php";
+include "./IHM/footer.php";
