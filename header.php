@@ -4,18 +4,20 @@
 include "config.php";
 
 echo "<div> header </div>";
+?>
 
-$Bdd = null;
-try{
+<?php
+//$Bdd = null;
+//try{
 
-    $Bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$nomBase.'; charset=utf8', '' . $userBase . '', '' . $mdpBase . '');
-    $connect = true;
-}Catch(Exception $e){
-        echo '<div class="error">Exception reçue : ',  $e->getMessage(), "</div>";
-        $connect = false;
-
-    }
+ //   $Bdd = new PDO('mysql:host=' . $adresse . '; dbname='.$nomBase.'; charset=utf8', '' . $userBase . '', '' . $mdpBase . '');
+ //   $connect = true;
+//}Catch(Exception $e){
+  //      echo '<div class="error">Exception reçue : ',  $e->getMessage(), "</div>";
+   //     $connect = false;
+  //  }
+    
 
 //on simule une connexion tjs valide
-$connect = true;
+//$connect = true; 
 
