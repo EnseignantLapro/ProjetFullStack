@@ -12,6 +12,22 @@ $mdpBase="";
 
 include "./config.php";
 echo "header";
+
+
+session_start();
+
+$isconnect=false;
+
+if(isset($_SESSION['Connect'])){
+
+    $isconnect=$_SESSION['Connect'];
+
+}else{
+
+    include "formulaire.php";
+
+}
+
 /*
 $Bdd = null;
 try{
