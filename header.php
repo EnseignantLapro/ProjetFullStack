@@ -4,9 +4,17 @@
 include "config.php";
 
 echo "<div> header </div>";
-?>
 
-<?php
+
+$isconnect = false;
+
+if (isset($_SESSION['Connect'])) {
+
+  $isconnect = true;
+} else {
+  $isconnect = false;
+}
+
 $Bdd = null;
 try {
 

@@ -1,5 +1,5 @@
-<?php require("../BDD/connexion.php");
-require "../header.php"; ?>
+<?php require("./BDD/connexion.php");
+require "./header.php"; ?>
 
 <html>
 
