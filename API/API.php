@@ -1,5 +1,5 @@
 <?php include "../BDD/Entite.php";
-      include "../BDD/combat.php";
+      include "../Metier/attaquer.php";
       include "../BDD/Hero.php";
 
     
@@ -105,10 +105,4 @@
 
 
     }
-
-
-
-
-
-
 ?>
