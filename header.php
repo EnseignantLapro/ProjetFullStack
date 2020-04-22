@@ -7,6 +7,7 @@ echo "<div> header </div>";
 ?>
 
 <?php
+/*
 $Bdd = null;
 try {
 
@@ -16,7 +17,8 @@ try {
   echo '<div class="error">Exception reçue : ',  $e->getMessage(), "</div>";
   $connect = false;
 }
-    
+    */
 
 //on simule une connexion tjs valide
 //$connect = true; 
+?>

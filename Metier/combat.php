@@ -6,7 +6,7 @@ include "../BDD/Entite.php";
 /* En cours de construction*/
 
 
-function Attaquer($IdAgresseur, $IdVictime, $Bdd)
+function Attaquer($IdAgresseur,$IdVictime,$Bdd)
 {
 
     $Agresseur = new entite($IdAgresseur, $Bdd);

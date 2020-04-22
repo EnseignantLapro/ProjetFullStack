@@ -26,7 +26,7 @@ include "config.php";
 <body>
 
     <?php
-
+    $connect = 1;
     if (isset($connect)) {
         echo "<div>vous etes sur le site</div>";
     } else {
@@ -44,3 +44,4 @@ include "config.php";
 
 
 include "./IHM/footer.php";
+?>
