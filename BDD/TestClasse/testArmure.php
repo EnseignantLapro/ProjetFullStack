@@ -1,7 +1,7 @@
 <?php
 //DEV BY GARNON
-include("../header.php");
-include("Armure.php");
+include("../../header.php");
+include("../Armure.php");
 $reqArmure = $Bdd->query("SELECT * FROM armure");
 $reqDel = $Bdd->query("SELECT * FROM armure");
 ?>
@@ -9,20 +9,22 @@ $reqDel = $Bdd->query("SELECT * FROM armure");
 <form action="" method="post">
     <select name="Listeheros">
         <?php
-        $reqAssos = $Bdd->query("SELECT * FROM assoshero WHERE id_user = 1");
+        $reqAssos = $Bdd->query("SELECT * FROM assochero WHERE id_user = 1");
         while ($info = $reqAssos->fetch()) {
-            $reqHero = $Bdd->query('SELECT * FROM typehero WHERE id_hero = ' . $info['id_hero'] . '');
+            $reqHero = $Bdd->query('SELECT * FROM hero WHERE id_hero = ' . $info['id_hero'] . '');
             $heroinfo = $reqHero->fetch();
-            echo "<option value=" . $info['id_hero'] . ">" . $heroinfo['nom'] . "</option>";
+            $reqTypehero = $Bdd->query('SELECT * FROM typehero WHERE id_typehero = '.$heroinfo['id_typehero'].'');
+            $typeheroinfo = $reqTypehero->fetch();
+            echo "<option value=" . $info['id_hero'] . ">" . $typeheroinfo['nom'] . "</option>";
         } ?>
     </select>
-    <select name="listeArmure">
+    <select name="Listearmures">
         <?php
         while ($infoarmure = $reqArmure->fetch()) {
             echo "<option value=" . $infoarmure['id_armure'] . ">" . $infoarmure['nom'] . "</option>";
         } ?>
     </select>
-    <input type="submit" name="submitArmure">
+    <input type="submit" name="submitarmure">
 </form>
 <form action="" method="post">
     Nom de l'armure :
@@ -31,7 +33,7 @@ $reqDel = $Bdd->query("SELECT * FROM armure");
     <input type="text" name="prixCrea">
     Durabilite de l'armure :
     <input type="text" name="durabiliteCrea">
-    Degats de l'armure :
+    Defense de l'armure :
     <input type="text" name="defenseCrea">
     <input type="submit" name="submitCrea">
 </form>
@@ -47,10 +49,10 @@ $reqDel = $Bdd->query("SELECT * FROM armure");
 </form>
 <?php
 // Equipement de l'armure
-if (isset($_POST['submitArmure'])) {
-    $armure = new Armure($Bdd, $_POST['listeArmure'], 0);
-    echo "Le nom de l'armure est : " . $armure->getNom() . ", elle coûte " . $armure->getPrix() . "€, elle fait " . $armure->getDegat() . " de dégats et est à " . $armure->getDurabilite() . "%";
-    echo "<br>armure équipée";
+if (isset($_POST['submitarmure'])) {
+    $armure = new Armure($Bdd, $_POST['Listearmures'], 0);
+    echo "Le nom de l'armure est : " . $armure->getNom() . ", elle coûte " . $armure->getPrix() . "€, elle fait " . $armure->getDefense() . " de defense et est à " . $armure->getDurabilite() . "%";
+    echo "<br>Armure équipée";
     $armure->equiperArmure(1, $_POST['Listeheros']);
 }
 //Suppression de l'armure
@@ -61,7 +63,7 @@ if (isset($_POST['submitDel'])) {
 // Creation de l'armure
 if (isset($_POST['submitCrea'])  && !empty($_POST['nomCrea']) && !empty($_POST['prixCrea']) && !empty($_POST['durabiliteCrea']) && !empty($_POST['defenseCrea'])) {
     $armureCree = new Armure($Bdd, NULL, 1);
-    echo "<br>Armure créée";
+    echo "<br>armure créée";
     $armureCree->createArmure($_POST['nomCrea'], $_POST['prixCrea'], $_POST['durabiliteCrea'], $_POST['defenseCrea']);
 }
 ?>
