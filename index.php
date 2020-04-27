@@ -3,6 +3,8 @@
 include "header.php";
 include "config.php";
 
+
+
 /*if(isset($_GET['map'])){
         echo "vous êtes sur la map N°".$_GET['map'];
 
@@ -13,24 +15,34 @@ include "config.php";
     }
 */
 ?>
-<form method="post" action="">
-    <h3>Log In</h3>
-    <fieldset>
-        <input type="text" name="email" placeholder="Adresse Mail" autofocus required>
-        <input type="text" name="password" placeholder="Mot de passe" required>
-    </fieldset>
-    <fieldset>
-        <form method="post" action="">
-            <input class="button" type="submit" value="Se connecter">
-        </form>
-        <form method="post" action="">
-            <input class="button" type="submit" value="S'inscrire">
-        </form>
-    </fieldset>
-    <?php
-    if ($connect == true) {
-        echo "je suis connect";
-    } else if ($connect == false) {
-    }
 
-    include "footer.php";
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="IHM/bootstrap-4.4.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="IHM/index.css">
+</head>
+
+<body>
+
+    <?php
+
+    if (isset($isconnect)) {
+        if ($isconnect == true){
+        echo "<div>vous etes sur le site</div>";
+    } else {
+        include "IHM/formulaire.php";
+    }
+}
+
+    ?>
+
+</body>
+
+</html>
+
+<?php
+//$Perso1 = new Hero(0, $Bdd);
+
+
+include "footer.php";
