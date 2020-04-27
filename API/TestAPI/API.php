@@ -1,7 +1,8 @@
 <?php 
         include "../../BDD/Entite.php";
-        //include "../../header.php";
-        include "../../Metier/combat.php";
+        include "../../Metier/attaquer.php";
+        
+        
         
         
 

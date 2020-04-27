@@ -4,9 +4,8 @@
 include "config.php";
 
 echo "<div> header </div>";
-?>
 
-<?php
+
 /*
 $Bdd = null;
 try {

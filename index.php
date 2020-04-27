@@ -30,8 +30,9 @@ include "config.php";
     if (isset($connect)) {
         echo "<div>vous etes sur le site</div>";
     } else {
-        echo "<div>vous devez vous identifiez</div>";
+        include "IHM/formulaire.php";
     }
+
 
     ?>
 
@@ -43,5 +44,5 @@ include "config.php";
 //$Perso1 = new Hero(0, $Bdd);
 
 
-include "./IHM/footer.php";
+include "footer.php";
 ?>
