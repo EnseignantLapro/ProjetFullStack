@@ -23,7 +23,7 @@ include "../header.php";
         <form action="" method="POST">
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Veuillez saisir votre Pseudo</label>
-                <input type="text" class="form-control" name="username_ins" required />
+                <input type="text" class="form-control" name="pseudo" required />
             </div>
             <div>
                 <label class="my-1 mr-2 ">Selectionner Votre Champion</label>
@@ -43,6 +43,7 @@ include "../header.php";
 
         <?php
             //TODO php pour le traitement du formulaire
+
         ?>
 
     </div>
