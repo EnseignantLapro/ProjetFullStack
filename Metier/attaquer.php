@@ -9,8 +9,8 @@ include "../BDD/Entite.php";
 function Attaquer($IdAgresseur,$IdVictime,$Bdd)
 {
 
-    $Agresseur = new entite($IdAgresseur, $Bdd);
-    $Victime = new entite($IdVictime, $Bdd);
+    $Agresseur = new Entite($IdAgresseur, $Bdd);
+    $Victime = new Entite($IdVictime, $Bdd);
 
 
     $ReductionDegats = $Agresseur->getAttaque() * (($Victime->getDefense() * 80 / 200) / 100);
@@ -30,5 +30,5 @@ function Attaquer($IdAgresseur,$IdVictime,$Bdd)
 }
 
 echo "<div><p>Appuyez sur f5 pour attaquer";
-Attaquer(1, 2, $Bdd);
+//Attaquer(1,2,$Bdd);
 
