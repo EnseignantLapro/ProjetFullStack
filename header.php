@@ -6,15 +6,7 @@ include "config.php";
 echo "<div> header </div>";
 
 
-$isconnect = false;
-
-if (isset($_SESSION['Connect'])) {
-
-  $isconnect = true;
-} else {
-  $isconnect = false;
-}
-
+/*
 $Bdd = null;
 try {
 
@@ -24,7 +16,8 @@ try {
   echo '<div class="error">Exception reçue : ',  $e->getMessage(), "</div>";
   $connect = false;
 }
-    
+    */
 
 //on simule une connexion tjs valide
 //$connect = true; 
+?>

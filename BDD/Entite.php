@@ -1,6 +1,6 @@
 <?php
 // Dev By Wantelez Florian
-class entite
+class Entite
 {
     private $_IdEntite;
     private $_Nom;
@@ -10,13 +10,14 @@ class entite
     private $_Niveau;
     private $_etat;
 
-    public function __construct($IdEntite, $Bdd)
+    public function __construct($IdEntite,$Bdd)
     {
         $this->_IdEntite = $IdEntite;
 
-        $DataEntite = $Bdd->query("SELECT * from entite where id_entite =" . $IdEntite . "");
+        $DataEntite = $Bdd->query('SELECT * FROM entite where id_entite ="'.$IdEntite.'"');
 
-        if (isset($DataEntite)) {
+        if(isset($DataEntite)) 
+        {
             //TODO Traiter le cas ou DataEntite est pas un objet de requete
             $TabDataEntite = $DataEntite->fetch();
             // On récupère toutes les infos de l'entité
@@ -29,7 +30,9 @@ class entite
             $this->_Defense = $TabDataEntite["defense"];
             $this->_Niveau = $TabDataEntite["niveau"];
             $this->_etat = $TabDataEntite["etat"];
-        } else {
+        } 
+        else 
+        {
             echo "L'objet est vide";
         }
     }

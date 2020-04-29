@@ -1,7 +1,7 @@
 <?php
 include "Entite.php";
 // Dev By Wantelez Florian
-class Hero extends entite
+class Hero extends Entite
 {
 
     private $_IdHero;

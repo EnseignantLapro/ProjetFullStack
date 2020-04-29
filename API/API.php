@@ -1,108 +1,69 @@
-<?php include "../BDD/Entite.php";
-      include "../Metier/attaquer.php";
-      include "../BDD/Hero.php";
+<?php
+//include "../BDD/Entite.php";
+include "../Metier/attaquer.php";
 
-    
-    
 
-    $_POST['combat'] = 1;
-    $_POST['idagresseur'] = 2;
-    $_POST['idvictime'] = 3;
-    $_POST['getnom'];
-    
-    $iddehero=2;
-    $iddevictime=3;
-    
-    try
+
+
+
+
+// Dev By Mathis
+
+
+
+
+
+
+if(isset($_POST['combat'])&&isset($_POST['idagresseur'])&&isset($_POST['idvictime']))
+{
+    if($_POST['combat']==1)
     {
-        $bdd = new PDO('mysql:host=localhost; dbname=pfullstack; charset=utf8','root','');
-    }
-    catch(Exception $e)
-    {
-        echo "erreur connexion à la base";
-    }
-
-    if(isset($_POST['combat'])&&isset($_POST['idagresseur'])&&isset($_POST['idvictime']))
-    {
-        //prochainement : requete sql qui permettra d'identifier l'agresseur et la victime 
-
-        if($_POST['idagresseur']== $iddehero) //si l'agresseur est un hero, j'instancie un hero
+        try
         {
-            $persotamp1 = new Entite(1,$bdd);
+            $bdd = new PDO('mysql:host=localhost; dbname=pfullstack; charset=utf8','root','');
+            echo "reussi";
+        }
+        catch(Exception $e)
+        {
+            echo "erreur connexion à la base";
         }
 
-        if( $_POST['idvictime'] ==  $iddevictime)
+        try
         {
+            $idagresseur = $_POST['idagresseur'];
+            $idvictime = $_POST['idvictime'];
+            $dataagresseur = $bdd->query('SELECT id_entite FROM entite where id_entite="'.$idagresseur.'"'); //on verifie si les deux entités demandées existent en base
+            $tabagresseur = $dataagresseur->fetch();
+            $idagresseur = $tabagresseur['id_entite'];
 
-            $persotamp2 = new Entite(2,$bdd);
+            $datavictime = $bdd->query('SELECT id_entite FROM entite where id_entite="'.$idvictime.'"');
+            $tabvictime = $datavictime->fetch();
+            $idvictime = $tabvictime['id_entite'];
+
+            $agresseur = new Entite($idagresseur,$bdd);
+            $victime = new Entite($idvictime,$bdd);
+
+            Attaquer($idagresseur,$idvictime,$bdd);
+
+
+            $viepersoattaquant = $agresseur->getPdv(); //on récupère la vie de l'entité attaquant et de l'entité attaquée, ce sont les informations à retourner
+            $viepersovictime = $victime->getPdv();
+            $life = array('vie' => $viepersoattaquant, 'vie2' => $viepersovictime);
+
+            echo json_encode($life);
+            //$jsonretour = "{_Vie:vieperso1,_Vie:vieperso2}";
+            //echo $jsonretour;
+
         }
-      
-
-        $persotemp1->Attaquer(1,2,$bdd); //le premier id est celui de l'agresseur, le second celui de la victime
-       
-         
-        $viepersoattaquant =  $persotamp1->getPdv(); //on récupère la vie de l'entité attaquant et de l'entité attaquée, ce sont les informations à retourner
-        $viepersovictime = $persotamp2->getPdv();
-        $life = array('vie' => $vieperso1, 'vie2' => $vieperso2);
-
-        //$jsonretour = "{_Vie:vieperso1,_Vie:vieperso2}";
-        //echo $jsonretour;
-
-        echo json_encode($life);
+        catch(Exception $e)
+        {
+            echo "erreur, la ou les entités n'existe/existent pas";
+        }
     }
-    
-    if(isset($_POST['getid'])&&isset($_POST['idperso1']))
-    {
-        //prochainement : requete sql qui récupèrera l'id du personnage en question
-
-        $persotemp1= new Hero(4,$bdd);
-
-        $id = $persotemp1->GetID(); 
-
-        $tabid = array('idperso' => $id);
-
-        //$jsonretour = "{_Id:id}";
-        //echo $jsonretour;
-
-        echo json_encode($tabid);
-
-
-    }
-
-    if(isset($_POST['afficherstat'])&&isset($_POST['idperso1']))
-    {
-        //prochainement : requete sql qui récupèrera les l'id du personnage en question pour avoir toutes ses infos
-
-        $persotemp1= new Hero(6,$bdd);
-
-        $chainearenvoyer= $persotemp1->AfficherStats(); 
-
-        $chaine = array('stats' => $chainearenvoyer);
-
-        //$jsonretour = "{chainearenvoyer}";
-        //echo $jsonretour;
-
-        echo json_encode($chaine);
+}
 
 
 
-    }
-
-    if(isset($_POST['setpseudo'])&&isset($_POST['idperso1'])&&isset($_POST['nouveaupseudo']))
-    {
-        //prochainement : requete sql qui récupèrera l'id du personnage en question pour avoir son pseudo
-
-        $persotemp1= new Hero(5,$bdd);
-
-        $nvpseudo = $persotemp1->SetPseudo($_POST['nouveaupseudo']);
-
-        $tabpseudo = array('pseudo' => $nvpseudo);
-
-        //$jsonretour = "{nouveaupseudo}";
-        //echo $jsonretour;
-
-        echo json_encode($tabpseudo);
 
 
-    }
 ?>

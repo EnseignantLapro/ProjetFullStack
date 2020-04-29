@@ -26,14 +26,13 @@ include "config.php";
 <body>
 
     <?php
-
-    if (isset($isconnect)) {
-        if ($isconnect == true){
+    $connect = 1;
+    if (isset($connect)) {
         echo "<div>vous etes sur le site</div>";
     } else {
         include "IHM/formulaire.php";
     }
-}
+
 
     ?>
 
@@ -46,3 +45,4 @@ include "config.php";
 
 
 include "footer.php";
+?>
