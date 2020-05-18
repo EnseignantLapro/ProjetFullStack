@@ -13,15 +13,6 @@
             echo '<div class="error">Exception reçue : ',  $e->getMessage(), "</div>";
            
       }
-      /*
-      $dataattaque = $Bdd->query('SELECT id_entite FROM entite where id_entite="'.$ida.'"'); //on verifie si les deux entités demandées existent en base
-      $tabattaque = $dataattaque->fetch();
-
-
-
-      $datavictime = $Bdd->query('SELECT id_entite FROM entite WHERE id_entite ="' .$idv.'"');
-      $tabvictime = $datavictime->fetch();
-      */
 
 
       $attaque = new Entite($ida, $Bdd);
